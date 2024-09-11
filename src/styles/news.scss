@@ -3,7 +3,7 @@
   // up/down, left/right
   margin: 0 auto;
   max-width: 1000px;
-  padding: 1rem;
+  padding: 1.2rem;
   
 
   .news {
@@ -13,19 +13,28 @@
       text-align: left;
       margin: 3rem 0 0.5rem;
     }
+
     &-author {
       font-size: 1em;
       color: #777;
     }
+
     &-date {
       font-size: 1.15em;
       font-weight: 400;
       color: #777;
     }
+
     &-top-banner {
       width: 100%;
       margin: 1rem auto;
       border-radius: 5px;
+    }
+
+    &-content {
+      font-size: 1.22em;
+      letter-spacing: .09em;
+      line-height: 1.75em;
     }
   }
 }
