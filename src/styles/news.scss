@@ -43,5 +43,30 @@
       margin: 2em auto;
       color: #ff6600; 
     }
+
+    &-keyword-list {
+      display: flex;
+      align-items: center;
+
+      b {
+        font-size: 1.2em;
+        margin-right: 10px;
+      }
+
+      span {
+        margin: auto .3em;
+        padding: 5px 10px;
+        color: #3e3a39;;
+        background-color: 
+        #EBEBEB;;
+        border-radius: 16px;
+        &:hover {
+          background-color: #78be23;
+          color: white;
+        }
+      }
+      
+    }
+    
   }
 }
