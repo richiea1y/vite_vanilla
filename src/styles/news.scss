@@ -47,6 +47,7 @@
     &-keyword-list {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
 
       b {
         font-size: 1.2em;
@@ -54,7 +55,7 @@
       }
 
       span {
-        margin: auto .3em;
+        margin: 5px .3em;
         padding: 5px 10px;
         color: #3e3a39;;
         background-color: 
@@ -65,8 +66,6 @@
           color: white;
         }
       }
-      
     }
-    
   }
 }
