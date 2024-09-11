@@ -32,9 +32,16 @@
     }
 
     &-content {
-      font-size: 1.22em;
+      font-size: 1.23em;
       letter-spacing: .09em;
       line-height: 1.75em;
+      margin-bottom: 1.9em;
+    }
+
+    &-subtitle {
+      font-size: 1.25em;
+      margin: 2em auto;
+      color: #ff6600; 
     }
   }
 }
