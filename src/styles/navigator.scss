@@ -7,7 +7,7 @@
   height: 60px;
   background: rgba(250, 250, 250, 0.4);
   backdrop-filter: blur(10px);
-  padding: 0 10px;
+  padding: 0 0 0 10px;
 
   display: flex;
   align-items: center;
@@ -15,35 +15,45 @@
 
   &-trigger {
     position: relative;
-    padding: 15px 10px;
-    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #626260;
+    margin-right: 0;
+    padding: 15px 15px;
+    // border: 1px solid #333;
     box-sizing: border-box;
-    width: 44px;
-    height: 44px;
+    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.5);
+    width: 60px;
+    height: 60px;
     cursor: pointer;
 
     i {
       display: block;
-      width: 20px;
-      height: 1px;
-      background-color: #333;
+      width: 30px;
+      height: 3px;
+      background-color: #7c7878;
       margin: 4px 0;
+    }
+
+    &:hover {
+      background-color: #595957;
     }
 
     &::before {
       content: "";
       display: block;
-      width: 20px;
-      height: 1px;
-      background-color: #333;
+      width: 30px;
+      height: 3px;
+      background-color: #7c7878;
     }
 
     &::after {
       content: "";
       display: block;
-      width: 20px;
-      height: 1px;
-      background-color: #333;
+      width: 30px;
+      height: 3px;
+      background-color: #7c7878;
     }
   }
 }
@@ -76,6 +86,48 @@
   // X 軸位移
   transform: translateX(100%);
 
+  .nav-list {
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.3em;
+    color: #7c7878;
+
+    li {
+      position: relative;
+      width: 100%;
+      text-align: center;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: rgba(124, 120, 120, 0.2);
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 2px solid transparent;
+        pointer-events: none;
+      }
+
+      &:hover::before {
+        animation: ripple-border 1s linear infinite;
+      }
+
+      a {
+        display: block;
+        padding: 10px 0;
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  }
+
   // 被打開的樣式
   &.is-active {
     transform: translateX(0);
@@ -87,5 +139,16 @@
     transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
     transform: translateX(100%);
   }
+}
 
+@keyframes ripple-border {
+  0% {
+    border-color: rgba(255, 255, 255, 0);
+  }
+  20% {
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    border-color: rgba(255, 255, 255, 0);
+  }
 }
