@@ -50,6 +50,7 @@
 
 .nav-mask {
   position: fixed;
+  display: none;
   top: 0;
   left: 0;
   z-index: 101;
@@ -57,6 +58,9 @@
   height: 100%;
   background: rgba(250, 250, 250, 0.2);
   backdrop-filter: blur(8px);
+  &.is-active {
+    display: block;
+  }
 }
 
 .nav-panel {
@@ -69,4 +73,19 @@
   background: linear-gradient(90deg, #333, #363636);
   // 陰影效果
   box-shadow: -4px 0 6px rgba(0, 0, 0, 0.5);
+  // X 軸位移
+  transform: translateX(100%);
+
+  // 被打開的樣式
+  &.is-active {
+    transform: translateX(0);
+    transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
+  }
+
+  &.is-disabled {
+    // transition 效果
+    transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
+    transform: translateX(100%);
+  }
+
 }
