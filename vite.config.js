@@ -25,7 +25,7 @@ export default defineConfig({
         // 首頁須使用main作為命名，指向index.html，其他依照檔名即可
         main: resolve(__dirname, "index.html"),
         topic: resolve(__dirname, "topic.html"),
-        contact: resolve(__dirname, "contact.html"),
+        products: resolve(__dirname, "products.html"),
       },
       output: {
         /* 

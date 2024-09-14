@@ -87,5 +87,36 @@
     transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
     transform: translateX(100%);
   }
+}
 
+ul.infinity-menu {
+  display: block;
+  width: 160px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: #fefefe;
+
+  li {
+    position: relative;
+    padding: 0 16px;
+    background: #363636;
+    line-height: 40px;
+    cursor: pointer;
+    
+    &:hover {
+      background: lighten(#363636, 10%);
+      & > ul {
+        display: block;
+      }
+    }
+  
+    ul {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 100%;
+    }
+  }
 }
