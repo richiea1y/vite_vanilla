@@ -87,6 +87,48 @@
     transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
     transform: translateX(100%);
   }
+
+  ul.nav-list {
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.1em;
+    color: #7c7878;
+
+    li {
+      position: relative;
+      width: 100%;
+      text-align: center;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: rgba(124, 120, 120, 0.2);
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 2px solid transparent;
+        pointer-events: none;
+      }
+
+      &:hover::before {
+        animation: ripple-border 1s linear infinite;
+      }
+
+      a {
+        display: block;
+        padding: 5px 0;
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  }
 }
 
 ul.infinity-menu {
