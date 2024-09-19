@@ -9,3 +9,51 @@
   grid-template-columns: repeat(auto-fill, minmax($minSize, 1fr));
   grid-gap: $gap;
 }
+
+$dice-layouts: (
+  1: (
+    (50%, 50%)
+  ),
+  2: (
+    (25%, 25%),
+    (75%, 75%)
+  ),
+  3: (
+    (25%, 25%),
+    (50%, 50%),
+    (75%, 75%)
+  ),
+  4: (
+    (25%, 25%),
+    (25%, 75%),
+    (75%, 25%),
+    (75%, 75%)
+  ),
+  5: (
+    (25%, 25%),
+    (25%, 75%),
+    (50%, 50%),
+    (75%, 25%),
+    (75%, 75%)
+  ),
+  6: (
+    (25%, 25%),
+    (25%, 75%),
+    (50%, 25%),
+    (50%, 75%),
+    (75%, 25%),
+    (75%, 75%)
+  )
+);
+@mixin useDiceDotPosition($dice-number, $dot-index) {
+  $positions: map-get($dice-layouts, $dice-number); // 取得對應骰子的所有點數座標
+  $position: nth($positions, $dot-index); // 取得指定點數的對應座標
+
+  top: nth($position, 1);
+  @if length($position) != 1 {
+    left: nth($position, 2);
+  } @else {
+    left: nth($position, 1);
+  }
+
+}
