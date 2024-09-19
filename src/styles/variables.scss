@@ -6,6 +6,6 @@
 
 @mixin useGridList($minSize, $gap) {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax($minSize), 1fr);
+  grid-template-columns: repeat(auto-fill, minmax($minSize, 1fr));
   grid-gap: $gap;
 }

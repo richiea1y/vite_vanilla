@@ -1,12 +1,12 @@
 .products-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  grid-gap: 20px;
-  padding: 1rem;
-  margin: 0 auto;
-  max-width: 1200px;
-  // @include base.useGridList(240px, 20px);
-  // @include base.useContainer(1200px, 1rem);
+  // display: grid;
+  // grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  // grid-gap: 20px;
+  // padding: 1rem;
+  // margin: 0 auto;
+  // max-width: 1200px;
+  @include base.useGridList(240px, 20px);
+  @include base.useContainer(1200px, 1rem);
 }
 
 .product-card {
