@@ -49,6 +49,8 @@ $dice-layouts: (
   $positions: map-get($dice-layouts, $dice-number); // 取得對應骰子的所有點數座標
   $position: nth($positions, $dot-index); // 取得指定點數的對應座標
 
+  // @debug $positions;
+
   top: nth($position, 1);
   @if length($position) != 1 {
     left: nth($position, 2);
