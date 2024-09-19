@@ -1,3 +1,6 @@
+// 引用 'variables.scss 做名為 base 的 component
+@use 'variables.scss' as base;
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';

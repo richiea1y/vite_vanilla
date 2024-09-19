@@ -1,0 +1,11 @@
+@mixin useContainer($maxWidth, $padding) {
+  margin: 0 auto;
+  max-width: $maxWidth;
+  padding: $padding;
+}
+
+@mixin useGridList($minSize, $gap) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($minSize), 1fr);
+  grid-gap: $gap;
+}
