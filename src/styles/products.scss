@@ -82,7 +82,6 @@
 .dice-container {
   @include base.useGridList(180px, 20px);
   @include base.useContainer(1200px, 1rem);
-  @apply p-10 mt-8 mb-8;
 }
 
 .dice {
