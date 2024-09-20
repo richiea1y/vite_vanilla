@@ -1,0 +1,92 @@
+$breakpoint-mobile: 990px;
+header {
+  position: relative;
+  background-color: #101010;
+  padding: 0 2rem;
+}
+
+.navbar {
+  height: 62px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &-list {
+    display: flex;
+    gap: 2rem;
+
+    li {
+      list-style: none;
+    }
+
+    a {
+      font-size: 13px;
+      padding: 5px 0;
+      text-decoration: none;
+      color: #fff;
+
+      &:hover {
+        text-decoration: underline red 3px;
+        text-underline-offset: 10px;
+      }
+    }
+  }
+
+  &-trigger {
+    display: none;
+  }
+}
+
+@media screen and (max-width: $breakpoint-mobile){
+  header {
+    padding-left: 2rem;
+    padding-right: 0;
+  }
+
+  .navbar {
+    &-list {
+      display: none;
+    }
+
+    &-trigger {
+      display: block;
+      position: relative;
+      padding: 22px 20px;
+      box-sizing: border-box;
+      background-color: rgb(102, 51, 0);
+      width: 60px;
+      height: 62px;
+      cursor: pointer;
+      
+      i {
+        display: block;
+        width: 20px;
+        height: 1.5px;
+        background-color: #999999;
+        margin: 2px 0;
+      }
+  
+      &::before {
+        content: "";
+        display: block;
+        width: 20px;
+        height: 2px;
+        background-color: #999999;
+      }
+  
+      &::after {
+        content: "";
+        display: block;
+        width: 20px;
+        height: 2px;
+        background-color: #999999;
+      }
+    }
+  }
+}
+
+
+
