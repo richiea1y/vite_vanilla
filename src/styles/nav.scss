@@ -6,13 +6,13 @@ header {
 }
 
 .navbar {
-  height: 62px;
+  height: 75px;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 
   &-list {
     display: flex;
@@ -29,8 +29,8 @@ header {
       color: #fff;
 
       &:hover {
-        text-decoration: underline red 3px;
-        text-underline-offset: 10px;
+        text-decoration: underline #ee4036 2px;
+        text-underline-offset: 12px;
       }
     }
   }
