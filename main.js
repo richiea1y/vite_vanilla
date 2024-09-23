@@ -1,24 +1,43 @@
-import 'styles/style.scss'
+import 'styles/style.scss';
+import '@/js/nav.js';
+import '@/js/work-1.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-  // 選單事件
-  const navTrigger = document.getElementById('nav-trigger');
-  const navMask = document.getElementById('nav-mask');
-  const navPanel = document.getElementById('nav-panel');
+/** Click */
+const nameInput = document.getElementById('nameInput');
+const submitBtn = document.getElementById('submitBtn');
+const textMsg = document.getElementById('textMsg');
 
-  // 初始化，隱藏選單且不顯示 transition 效果，並且清除選單的 disable
-  navPanel.classList.remove('is-disabled');
+// 監聽按鈕點擊事件
+submitBtn.addEventListener('click', () => {
+  const name = nameInput.value; // 取得 input 中的值
+  textMsg.textContent = `Hello, ${name}!`; // 將值顯示在 <p> 元素中
+});
 
-  // 切換萬選單狀態的函示
-  const toggleNav = (isOpen) => {
-    navPanel.classList.toggle('is-active', isOpen);
-    navPanel.classList.toggle('is-disabled', !isOpen);
-    navMask.classList.toggle('is-active', isOpen);
-  };
+/** Input */
+const inputUsername = document.getElementById('inputUserName');
+const changeOutput = document.getElementById('changeOutput');
+// 監聽 input 事件，實時更新結果
+inputUsername.addEventListener('input', (event) => {
+  const value = event.target.value;
+  changeOutput.textContent = `Your username is: ${value}`;
+});
 
-  // 監聽觸發器的點擊事件，開啟選單
-  navTrigger.addEventListener('click', () => toggleNav(true));
+/** Change */
 
-  // 監聽遮罩的點擊事件，關閉選單
-  navMask.addEventListener('click', () => toggleNav(false));
+const lang = document.getElementById('language');
+const selectedLang = document.getElementById('selectedLang');
+
+// 監聽 change 事件，當選擇語言變更時更新顯示
+lang.addEventListener('change', (event) => {
+  const selectedOption = event.target.value;
+  selectedLang.textContent = `Selected language: ${selectedOption}`;
+});
+
+/** Keydown / Keyup */
+
+const keyInput = document.getElementById('keyInput');
+const keyPressedOutput = document.getElementById('keyPressed');
+// 監聽 keydown 事件，實時顯示按下的鍵
+keyInput.addEventListener('keydown', (event) => {
+  keyPressedOutput.textContent = `Key pressed: ${event.key}`;
 });
