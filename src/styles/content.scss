@@ -1,20 +1,31 @@
 $bannerBreakPoint: 880;
+
+.banner-wrapper {
+  background-color: black;
+  width: 100%;
+}
+
 .banner {
   position: relative;
-  background-color: black;
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding-right: 5em;
+  margin: 0 auto;
+  padding: 1em 1em;
+  max-width: 1200px;
+  max-height: 27rem;
 
-  &-img {
-    height: 435px;
-    overflow: hidden;
-  }
-  
-  img {
-    width: 100%;
-    height: 100%;
+  &-img{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; // 改為center
+    flex: 1.2;
     
+    img {
+      max-width: 100%;
+      height: auto;
+      max-height: 27rem;
+    }
   }
 
   &-info {
@@ -22,24 +33,31 @@ $bannerBreakPoint: 880;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: flex-start;
+    padding-left: 2em;
+    flex: 1;
+    
 
     h2 {
       font-size: 5em;
-      font-weight: 600;
+      font-weight: 700;
+      letter-spacing: 3px;
     }
   }
 
   &-subTitle{
     color: red;
-    font-size: 0.95em;
+    font-size: 1em;
     letter-spacing: 10px;
     padding-bottom: 10px;
   }
 
   &-button {
+    font-size: 0.85em;
+    font-weight: 500;
     text-align: center;
-    width: 160px;
-    padding: 13px 25px;
+    width: 140px;
+    padding: 12px 25px;
     border: 2px solid white;
     margin-top: 5px;
   }

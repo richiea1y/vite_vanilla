@@ -47,6 +47,7 @@ header {
   }
 
   .navbar {
+    justify-content: space-between;
     &-list {
       display: none;
     }
@@ -54,7 +55,7 @@ header {
     &-trigger {
       display: block;
       position: relative;
-      padding: 22px 20px;
+      padding: 25px 20px;
       box-sizing: border-box;
       background-color: rgb(102, 51, 0);
       width: 60px;
