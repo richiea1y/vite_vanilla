@@ -5,8 +5,10 @@
 @import 'nav.scss';
 @import 'banner.scss';
 @import 'products.scss';
+@import 'footer.scss';
 
-body, html {
+body,
+html {
   background-color: #333;
   background: url('../img/bg.webp') no-repeat fixed;
   background-size: cover;
