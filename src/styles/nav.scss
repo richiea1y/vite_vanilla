@@ -38,9 +38,17 @@ header {
   &-trigger {
     display: none;
   }
+
+  &-mask {
+    display: none;
+  }
+
+  &-pannel {
+    display: none;
+  }
 }
 
-@media screen and (max-width: $breakpoint-mobile){
+@media screen and (max-width: $breakpoint-mobile) {
   header {
     padding-left: 2rem;
     padding-right: 0;
@@ -62,7 +70,7 @@ header {
       width: 60px;
       height: 62px;
       cursor: pointer;
-      
+
       i {
         display: block;
         width: 20px;
@@ -70,17 +78,17 @@ header {
         background-color: #999999;
         margin: 2px 0;
       }
-  
+
       &::before {
-        content: "";
+        content: '';
         display: block;
         width: 20px;
         height: 2px;
         background-color: #999999;
       }
-  
+
       &::after {
-        content: "";
+        content: '';
         display: block;
         width: 20px;
         height: 2px;
@@ -89,6 +97,3 @@ header {
     }
   }
 }
-
-
-
