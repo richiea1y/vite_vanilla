@@ -9,7 +9,7 @@ $itemsBreakPoint: 660px;
   justify-content: center;
   padding: 3em 2em;
   margin: auto;
-  max-width: 1000px;
+  max-width: 1200px;
 }
 
 .promotion {
@@ -17,10 +17,6 @@ $itemsBreakPoint: 660px;
   align-items: center;
   justify-content: space-between;
   padding-bottom: 2.5em;
-
-  img {
-    max-height: 260px;
-  }
 
   &-1 {
     margin-right: 2em;
