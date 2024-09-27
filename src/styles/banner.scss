@@ -3,10 +3,10 @@ $bannerBreakPoint: 880px;
 .banner-wrapper {
   background-color: black;
   width: 100%;
+  max-height: 30rem;
 }
 
 .banner {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,16 +15,15 @@ $bannerBreakPoint: 880px;
   max-width: 1200px;
   max-height: 27rem;
 
-  &-img{
+  &-img {
     display: flex;
     align-items: center;
     justify-content: flex-end; // 改為center
     flex: 1.2;
-    
+
     img {
       max-width: 100%;
-      height: auto;
-      max-height: 27rem;
+      max-height: 24rem;
     }
   }
 
@@ -36,7 +35,6 @@ $bannerBreakPoint: 880px;
     align-items: flex-start;
     padding-left: 2em;
     flex: 1;
-    
 
     h2 {
       font-size: 5em;
@@ -45,7 +43,7 @@ $bannerBreakPoint: 880px;
     }
   }
 
-  &-subTitle{
+  &-subTitle {
     color: red;
     font-size: 1em;
     letter-spacing: 10px;
@@ -63,11 +61,80 @@ $bannerBreakPoint: 880px;
   }
 }
 
+@media screen and (max-width: 990px) {
+  .banner {
+    padding-top: 75px;
+  }
+}
+
 @media screen and (max-width: $bannerBreakPoint) {
+  .banner-wrapper {
+    max-height: 880px;
+  }
+
   .banner {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    max-height: 740px;
+    max-height: 880px;
+
+    img {
+      max-width: 100%;
+      max-height: 60rem;
+    }
+
+    &-info {
+      position: sticky;
+      padding: 0;
+
+      h2 {
+        font-size: 5em;
+        font-weight: 600;
+        letter-spacing: 3px;
+        margin: 0 auto;
+      }
+    }
+
+    &-subTitle {
+      font-size: 1em;
+      letter-spacing: 7px;
+      padding-bottom: 10px;
+      margin: 0 auto;
+    }
+
+    &-button {
+      width: 370px;
+      padding: 12px 25px;
+      border: 2px solid white;
+      margin-top: 5px;
+    }
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .banner {
+    &-info {
+      position: sticky;
+      padding: 0;
+
+      h2 {
+        font-size: 3.2em;
+        font-weight: 600;
+        letter-spacing: 3px;
+        margin: 0 auto;
+      }
+    }
+
+    &-subTitle {
+      font-size: 0.9em;
+      letter-spacing: 3px;
+      padding-bottom: 10px;
+      margin: 0 auto;
+    }
+
+    &-button {
+      width: 200px;
+      margin: 0 auto;
+    }
   }
 }

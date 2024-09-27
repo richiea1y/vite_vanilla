@@ -88,3 +88,11 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .site_map {
+    grid-auto-flow: column;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+  }
+}

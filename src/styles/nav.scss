@@ -1,20 +1,25 @@
 $breakpoint-mobile: 990px;
-header {
-  position: relative;
-  background-color: #101010;
-  padding: 0 2rem;
-}
+// header {
+//   background-color: #101010;
+//   padding: 0 2rem;
+//   z-index: 101;
+// }
 
 .navbar {
+  background-color: #101010;
   height: 75px;
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-around;
 
+  &-logo {
+    position: sticky;
+  }
+
   &-list {
+    position: sticky;
     display: flex;
     gap: 2rem;
 
@@ -49,14 +54,11 @@ header {
 }
 
 @media screen and (max-width: $breakpoint-mobile) {
-  header {
-    padding-left: 2rem;
-    padding-right: 0;
-  }
-
   .navbar {
+    position: fixed;
     height: 60px;
     justify-content: space-between;
+
     &-list {
       display: none;
     }
