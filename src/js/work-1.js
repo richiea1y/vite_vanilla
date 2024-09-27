@@ -7,7 +7,7 @@ var day1FormObj = {
   developerExp: ''
 }
 
-function day1Submit() {
+var day1Submit = () => {
   // 請從這裡開始作答，寫出事件和對象綁定，來替換掉Result的所有文字
 
   // Debugging line
@@ -32,13 +32,13 @@ function day1Submit() {
   console.log(resultText);
 }
 
+// 測試事件監聽能否正常運行
+var testEventListener = () => {
+  console.log('Test Pass');
+};
+
+
 // 新增按鈕事件
-var submitBtn = document.getElementById('submitBtn');
-if (submitBtn) {
-  submitBtn.addEventListener('click', day1Submit);
-  // Debugging line
-  console.log('Event listener added to submit button');
-} else {
-  // Debugging line
-  console.error('Submit button not found');
-}
+var day1SubmitBtn = document.getElementById('submitBtn');
+day1SubmitBtn.addEventListener('click', testEventListener);
+
