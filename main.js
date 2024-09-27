@@ -3,7 +3,7 @@ import 'styles/style.scss'
 document.addEventListener('DOMContentLoaded', () => {
   // 選單事件
   const navTrigger = document.getElementById('navbar-trigger');
-  const navMask = document.getElementById('navbar-mask');
+  // const navMask = document.getElementById('navbar-mask');
   const navPanel = document.getElementById('navbar-panel');
 
   // 初始化，隱藏選單且不顯示 transition 效果，並且清除選單的 disable
