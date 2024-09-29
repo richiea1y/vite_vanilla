@@ -80,40 +80,38 @@ $breakpoint-mobile: 990px;
   }
 
   .navbar-trigger {
-    display: block;
-    position: relative;
-    // top: 0%;
-    // left: 93%;
-
-    padding: 25px 20px;
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: rgb(102, 51, 0);
-    width: 60px;
-    height: 62px;
+    height: 100%;
+    // 讓寬度始終是正方形
+    aspect-ratio: 1/1;
     cursor: pointer;
     z-index: 101;
 
     i {
       display: block;
-      width: 20px;
-      height: 1.5px;
+      width: 25px;
+      height: 2.5px;
       background-color: #999999;
-      margin: 2px 0;
+      margin: 3px 0;
     }
 
     &::before {
       content: '';
       display: block;
-      width: 20px;
-      height: 2px;
+      width: 25px;
+      height: 2.5px;
       background-color: #999999;
     }
 
     &::after {
       content: '';
       display: block;
-      width: 20px;
-      height: 2px;
+      width: 25px;
+      height: 2.5px;
       background-color: #999999;
     }
   }
