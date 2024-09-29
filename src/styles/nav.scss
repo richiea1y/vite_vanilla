@@ -9,7 +9,7 @@ $breakpoint-mobile: 990px;
   background-color: #101010;
   height: 80px;
   width: 100%;
-  position: sticky;
+  position: fixed;
   // 讓 navbar-container 在 y 軸置中
   align-content: center;
 
@@ -20,6 +20,8 @@ $breakpoint-mobile: 990px;
     justify-content: space-between;
     // x 軸置中
     margin: auto;
+    height: 100%;
+    width: 100%;
     max-width: 1000px;
   }
 
@@ -60,13 +62,12 @@ $breakpoint-mobile: 990px;
 // 觸發選單元素的寬度突破點
 @media screen and (max-width: $breakpoint-mobile) {
   .navbar {
-    position: fixed;
     height: 70px;
 
     // Navbar 裡面用來包內容的容器
     &-container {
-      position: sticky;
-      margin: 0 auto; // x 軸置中
+      // x 軸置中
+      margin: 0 auto;
     }
 
     &-logo {
