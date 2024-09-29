@@ -1,10 +1,6 @@
 .footer {
   background-color: rgb(0, 0, 0);
   color: white;
-  display: grid;
-
-  grid-template-columns: repeat(1, auto);
-  grid-template-rows: 0.5fr 4fr 1.5fr;
   padding-bottom: 2em;
 }
 
@@ -89,8 +85,6 @@
 
 @media screen and (max-width: 600px) {
   .site_map {
-    &-container {
-      -webkit-line-clamp: 2;
-    }
+    flex-direction: column;
   }
 }
