@@ -9,14 +9,16 @@ $breakpoint-mobile: 990px;
   background-color: #101010;
   height: 80px;
   width: 100%;
+  // 讓 navbar-container 在 y 軸置中
+  align-content: center;
 
-  // Navbar 裡面用來包內容容器
+  // Navbar 裡面用來包內容的容器
   &-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: auto; // x 軸置中
-    padding-top: 1em; // 不知道怎麼把它在 y 軸置中
+    // x 軸置中
+    margin: auto;
     max-width: 1000px;
   }
 
@@ -54,11 +56,16 @@ $breakpoint-mobile: 990px;
   display: none;
 }
 
+// 觸發選單元素的寬度突破點
 @media screen and (max-width: $breakpoint-mobile) {
   .navbar {
     position: fixed;
-    height: 60px;
-    justify-content: space-between;
+    height: 70px;
+
+    // Navbar 裡面用來包內容的容器
+    &-container {
+      margin: 0 auto; // x 軸置中
+    }
 
     &-logo {
       padding: 0 10px;
