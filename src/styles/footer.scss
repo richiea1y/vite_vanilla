@@ -19,14 +19,11 @@
 }
 
 .site_map {
-  display: grid;
-  grid-auto-flow: column;
-  align-items: flex-start;
-  grid-template-columns: repeat(6, 1fr);
+  display: flex;
   justify-content: space-evenly;
-  justify-items: center;
-  // justify-self: middle;
-  // max-width: 800px;
+  // 內容會擠在一起
+  margin: 0 auto;
+  max-width: 800px;
   b {
     font-size: 1em;
     font-weight: 450;

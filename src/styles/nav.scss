@@ -9,6 +9,7 @@ $breakpoint-mobile: 990px;
   background-color: #101010;
   height: 80px;
   width: 100%;
+  position: sticky;
   // 讓 navbar-container 在 y 軸置中
   align-content: center;
 
@@ -42,10 +43,10 @@ $breakpoint-mobile: 990px;
       }
     }
   }
+}
 
-  &-trigger {
-    display: none;
-  }
+.navigator-trigger {
+  display: none;
 }
 
 .navbar-mask {
@@ -64,6 +65,7 @@ $breakpoint-mobile: 990px;
 
     // Navbar 裡面用來包內容的容器
     &-container {
+      position: sticky;
       margin: 0 auto; // x 軸置中
     }
 
@@ -74,41 +76,44 @@ $breakpoint-mobile: 990px;
     &-list {
       display: none;
     }
+  }
 
-    &-trigger {
+  .navbar-trigger {
+    display: block;
+    position: relative;
+    // top: 0%;
+    // left: 93%;
+
+    padding: 25px 20px;
+    box-sizing: border-box;
+    background-color: rgb(102, 51, 0);
+    width: 60px;
+    height: 62px;
+    cursor: pointer;
+    z-index: 101;
+
+    i {
       display: block;
-      position: relative;
-      padding: 25px 20px;
-      box-sizing: border-box;
-      background-color: rgb(102, 51, 0);
-      width: 60px;
-      height: 62px;
-      cursor: pointer;
-      z-index: 101;
+      width: 20px;
+      height: 1.5px;
+      background-color: #999999;
+      margin: 2px 0;
+    }
 
-      i {
-        display: block;
-        width: 20px;
-        height: 1.5px;
-        background-color: #999999;
-        margin: 2px 0;
-      }
+    &::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 2px;
+      background-color: #999999;
+    }
 
-      &::before {
-        content: '';
-        display: block;
-        width: 20px;
-        height: 2px;
-        background-color: #999999;
-      }
-
-      &::after {
-        content: '';
-        display: block;
-        width: 20px;
-        height: 2px;
-        background-color: #999999;
-      }
+    &::after {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 2px;
+      background-color: #999999;
     }
   }
 
