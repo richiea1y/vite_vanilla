@@ -7,19 +7,20 @@ $breakpoint-mobile: 990px;
 
 .navbar {
   background-color: #101010;
-  height: 75px;
+  height: 80px;
   width: 100%;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
 
-  &-logo {
-    position: sticky;
+  // Navbar 裡面用來包內容容器
+  &-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto; // x 軸置中
+    padding-top: 1em; // 不知道怎麼把它在 y 軸置中
+    max-width: 1000px;
   }
 
   &-list {
-    position: sticky;
     display: flex;
     gap: 2rem;
 
@@ -43,14 +44,14 @@ $breakpoint-mobile: 990px;
   &-trigger {
     display: none;
   }
+}
 
-  &-mask {
-    display: none;
-  }
+.navbar-mask {
+  display: none;
+}
 
-  &-panel {
-    display: none;
-  }
+.navbar-panel {
+  display: none;
 }
 
 @media screen and (max-width: $breakpoint-mobile) {
