@@ -13,26 +13,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 切換萬選單狀態的函示
 
-  // const toggleNav = (isOpen) => {
-  //   navPanel.classList.toggle('is-active', isOpen);
-  //   console.log(isOpen);
-  //   navPanel.classList.toggle('is-disabled', !isOpen);
-  //   console.log(isOpen);
-  //   navMask.classList.toggle('is-active', isOpen);
-  //   console.log(isOpen);
-  // };
-
-
+  const toggleNav = (isOpen) => {
+    navPanel.classList.toggle('is-active', isOpen);
+    navPanel.classList.toggle('is-disabled', !isOpen);
+    navMask.classList.toggle('is-active', isOpen);
+  };
 
   // 監聽觸發器的點擊事件，開啟選單
   navTrigger.addEventListener('click', () => toggleNav(true));
 
-
-
   // 監聽遮罩的點擊事件，關閉選單
-  // navMask.addEventListener('click', () => toggleNav(false));
+  navMask.addEventListener('click', () => toggleNav(false));
+
 });
-
-
-
-
