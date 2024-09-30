@@ -1,6 +1,12 @@
 $promotionBreakPoint: 600px;
 $itemsBreakPoint: 660px;
 
+.products-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .products {
   display: flex;
   flex-direction: column;
