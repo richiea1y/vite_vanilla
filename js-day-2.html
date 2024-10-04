@@ -10,9 +10,55 @@
 
 <body>
   <div id="app">
-    <h2>Click Event</h2>
-    <button id="submit">Submit</button>
+    <div>
+      <h1>物件遍歷處理</h1>
+      <b>Context:</b>
+      <ul>
+        <li>這是個模仿遊戲結束計算總分畫面的練習，有以下欄位：</li>
+        <li><b>Score:</b> 關卡得分</li>
+        <li><b>Special: </b>特別得分</li>
+        <li><b>Objective: </b>關卡小任務達成數量</li>
+        <li><b>compelete: </b>關卡完成獎勵</li>
+      </ul>
+
+      <b>Force:</b>
+      <ul>
+        <li>每個項目得分都由表單選擇的Objective倍率計算，也就是每個欄位都會被乘以Objective獎勵倍率2或4</li>
+        <li>遍歷物件時，避免Objective自己也被加算</li>
+      </ul>
+    </div>
+    <div id="app">
+      <div class="row horizontal space" data-space="space-bottom">
+        <label>Score:</label>
+        <input id="scoreVal" type="text" placeholder="Score">
+      </div>
+      <div class="row horizontal space" data-space="space-bottom">
+        <label>Special:</label>
+        <input id="specialVal" type="text" placeholder="Special">
+      </div>
+      <div class="row horizontal space" data-space="space-bottom">
+        <label>objective:</label>
+        <div>
+          <input id="rate_2x" type="radio" name="objective">
+          <label for="rate_2x">x2</label>
+          <input id="rate_4x" type="radio" name="objective">
+          <label for="rate_4x">x4</label>
+        </div>
+      </div>
+      <div class="row horizontal space" data-space="space-bottom">
+        <label>Compelete:</label>
+        <input id="compeleteVal" type="text" placeholder="Compelete">
+      </div>
+      <div class="row horizontal end">
+        <button id="submitBtn" class="submit">Confirm</button>
+      </div>
+    </div>
+    <p>Result:</p>
+    <div id="result">
+
+    </div>
   </div>
+
 </body>
 <script type="module" src="/main.js"></script>
 <script type="module" src="src/js/class-2.js"></script>
