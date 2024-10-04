@@ -31,7 +31,7 @@
     }
 
     &::before {
-      content: "";
+      content: '';
       display: block;
       width: 20px;
       height: 1px;
@@ -39,12 +39,19 @@
     }
 
     &::after {
-      content: "";
+      content: '';
       display: block;
       width: 20px;
       height: 1px;
       background-color: #333;
     }
+  }
+
+  &-title {
+    margin: auto;
+    color: #27374d;
+    font-size: 1.2em;
+    font-weight: 600;
   }
 }
 
@@ -70,21 +77,27 @@
   z-index: 102;
   width: 300px;
   height: 100%;
-  background: linear-gradient(90deg, #333, #363636);
+  background-color: #27374d;
+  // background: linear-gradient(90deg, #27374d, #363636);
   // 陰影效果
   box-shadow: -4px 0 6px rgba(0, 0, 0, 0.5);
   // X 軸位移
   transform: translateX(100%);
 
+  b {
+    font-size: 1.3em;
+    padding: 20px 10px;
+  }
+
   // 被打開的樣式
   &.is-active {
     transform: translateX(0);
-    transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
+    transition: all 500ms cubic-bezier(1, 0, 0, 1); /* easeInOutExpo */
   }
 
   &.is-disabled {
     // transition 效果
-    transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
+    transition: all 500ms cubic-bezier(1, 0, 0, 1); /* easeInOutExpo */
     transform: translateX(100%);
   }
 
@@ -145,14 +158,14 @@ ul.infinity-menu {
     background: #363636;
     line-height: 40px;
     cursor: pointer;
-    
+
     &:hover {
       background: lighten(#363636, 10%);
       & > ul {
         display: block;
       }
     }
-  
+
     ul {
       display: none;
       position: absolute;
