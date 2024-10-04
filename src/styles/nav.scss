@@ -97,27 +97,27 @@ $breakpoint-mobile: 990px;
 
 .navbar-panel {
   position: fixed;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: 400ms grid-template-rows ease;
   top: 5.3%;
   z-index: 102;
   width: 100%;
   height: auto;
   background-color: rgba(0, 0, 0, 1);
 
-  // X 軸位
-
-  transform: translateX(100%);
-  // transform: translateY(-500%);
+  &.is-active {
+    grid-template-rows: 1fr;
+  }
 }
 
 ul.navbar-panel-list {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  padding: 16px 0;
   font-size: 1.05em;
   font-weight: 300;
   color: #fff;
   width: 100%;
+  overflow: hidden;
 
   li {
     width: 100%;
@@ -171,29 +171,6 @@ ul.navbar-panel-list {
 
   .navbar-panel {
     // display: block;
-
-    &.is-active {
-      transform: translateX(0%);
-      // transform: rotate(0deg);
-      // -webkit-transform: rotate(0deg);
-      // transition: all 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55); /* easeInOutBack *
-
-      // Test Animation
-      // background-color: #ee4036;
-      // transform: scale(1.2);
-    }
-
-    &.is-disable {
-      transform: translateX(100%);
-      // transition: all 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55); /* easeInOutBack */
-      // transform: rotate(90deg);
-      // -webkit-transform: rotate(90deg);
-    }
-
-    // Test trigger listener
-    &.test {
-      background-color: #ee4036;
-    }
   }
 
   .navbar-mask {
