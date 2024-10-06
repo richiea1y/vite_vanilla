@@ -1,5 +1,7 @@
 import { cloneDeep, stubString } from "lodash";
 
+// ------------------- First Assignment-----------------------//
+
 const obj = {
   score: "",
   special: "",
@@ -8,7 +10,6 @@ const obj = {
 };
 
 const objects = Object.keys(obj);
-
 
 
 // 新增表單提交的按鈕綁定
@@ -66,3 +67,31 @@ submitBtn.addEventListener('click', () => {
 });
 
 
+// ------------------- Second Assignment-----------------------//
+
+const existingUser = {
+  firstName: "John",
+  lastName: "Doe",
+  address: {
+    street: "123 Main St",
+    city: "New York"
+  },
+  email: "johndoe@example.com"
+};
+
+// 顯示原始使用者資料
+const resultText2 = document.getElementById("result2");
+resultText2.innerHTML = `
+  First Name: ${existingUser.firstName}<br/>
+  Last Name: ${existingUser.lastName}<br/>
+  Street: ${existingUser.address.street}<br/>
+  City: ${existingUser.address.city}<br/>
+  Email: ${existingUser.email}
+`;
+
+// 表單提交後的資料更新邏輯
+const submitBtn2 = document.getElementById('submitBtn2');
+submitBtn2.addEventListener('click', () => {
+
+  console.log('submit!!');
+});
