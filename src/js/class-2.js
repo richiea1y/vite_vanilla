@@ -127,5 +127,5 @@ const complexObj = {
 const newComplexObj = cloneDeep(complexObj)
 newComplexObj.details.year = "2030"
 // 比較新舊物件在日誌上的差異
-console.log('#### complexObj: ', complexObj)
-console.log('#### newComplexObj: ', newComplexObj)
+// console.log('#### complexObj: ', complexObj)
+// console.log('#### newComplexObj: ', newComplexObj)

@@ -70,7 +70,14 @@
   }
 }
 
-#app {
+#app > div {
+  .h1 {
+    font-size: 1.3em;
+  }
+}
+
+#work {
+  margin: auto;
   width: 20rem;
   input[type='text'] {
     @include boxSizing;
