@@ -18,4 +18,6 @@ const submit = () => {
 
   marketScope.innerHTML = marketHTML;
   factoryScope.innerHTML = factoryHTML;
+  console.log('hihiihihih');
 }
+
