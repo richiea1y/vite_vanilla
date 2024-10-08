@@ -70,14 +70,32 @@
   }
 }
 
-#app > div {
-  .h1 {
-    font-size: 1.3em;
+.assignment {
+  font-size: 1em;
+  color: #27374d;
+  margin: 1em 2em;
+  width: 100%;
+  max-width: 1000px;
+
+  h1 {
+    font-size: 1.7em;
+    color: #212121;
+    margin-top: 1em;
+  }
+
+  .topic {
+    // margin: auto;
+
+    & > b {
+      font-size: 1.5em;
+      font-weight: 500;
+      color: #212121;
+    }
   }
 }
 
 #work {
-  margin: auto;
+  margin: 1.3em auto;
   width: 20rem;
   input[type='text'] {
     @include boxSizing;
@@ -110,7 +128,13 @@
   }
 }
 
-#result {
+.result-header {
+  font-size: 1.3em;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.result {
   color: #333;
   line-height: 2rem;
   font-weight: bold;

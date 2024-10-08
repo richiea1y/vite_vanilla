@@ -22,7 +22,7 @@ const rateDouble = document.getElementById("rate_2x");
 const rateQuarter = document.getElementById("rate_4x");
 
 // DOM with id=result 
-const resultText = document.getElementById("result");
+const resultText = document.getElementById("result1");
 
 
 // 表單提交的按鈕的事件監聽
@@ -69,6 +69,7 @@ submitBtn.addEventListener('click', () => {
 
 // ------------------- Second Assignment-----------------------//
 
+
 const existingUser = {
   firstName: "John",
   lastName: "Doe",
@@ -104,7 +105,9 @@ submitBtn2.addEventListener('click', () => {
   // 遍歷所有輸入字段
   inputNodes2.forEach((nodeElement2) => {
     const nodeName2 = String(nodeElement2.id).replace("Val", "");
-    const value = nodeElement2.value.trim(); // 獲取並清理輸入值
+    // 獲取並清理輸入值
+    const value = nodeElement2.value.trim();
+
 
     // 根據字段名更新相應的屬性
     if (nodeName2 === 'street' || nodeName2 === 'city') {
@@ -116,7 +119,7 @@ submitBtn2.addEventListener('click', () => {
 
   // 在這裡你可以對更新後的 newUser 對象進行進一步處理
   // 例如，發送到服務器或更新UI
-  console.log('更新後的用戶數據:', newUser);
+  // console.log('更新後的用戶數據:', newUser);
   displayUpdatedUser();
 });
 
