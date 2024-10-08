@@ -1,0 +1,126 @@
+@mixin flexBox($direction) {
+  display: flex;
+  flex-direction: $direction;
+}
+
+@mixin flexAlign($alignItems, $justifyContent) {
+  align-items: $alignItems;
+  justify-content: $justifyContent;
+}
+
+@mixin boxSizing {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+}
+
+.row {
+  @include boxSizing;
+
+  position: relative;
+  width: 100%;
+  margin: 0;
+  /* &符號是sass的非變數連接字符，這裡的&.any就是 .row.any的意思 */
+  &.horizontal {
+    @include flexBox(row);
+    &.v_center {
+      @include flexAlign(center, flex-start);
+    }
+    &.end {
+      @include flexAlign(center, flex-end);
+      &.start {
+        align-items: flex-start;
+      }
+      &.center {
+        align-items: center;
+      }
+      &.end {
+        align-items: flex-end;
+      }
+    }
+    &.space {
+      @include flexAlign(center, space-between);
+    }
+  }
+
+  /* wrap 可以確保子元素在寬度不夠時自動換行喔 */
+  &.wrap {
+    flex-wrap: wrap;
+  }
+}
+
+[data-border='all'] {
+  border: 1px solid #000;
+}
+
+[data-space='space-bottom'] {
+  margin-bottom: 0.5rem;
+}
+
+@for $i from 0 through 100 {
+  [data-width='#{$i + "%"}'] {
+    width: #{$i + '%'};
+  }
+}
+
+@for $i from 1 through 100 {
+  [data-height='#{$i}vh'] {
+    height: #{$i}vh;
+  }
+}
+
+.assignment {
+  width: 100%;
+  color: #212121;
+  input[type='text'] {
+    @include boxSizing;
+    border-radius: 6px;
+    height: 36px;
+    border: 1px solid #ccc;
+    padding: 0.5rem 1rem;
+  }
+  input[type='radio'] {
+    width: 20px;
+    height: 20px;
+  }
+  label {
+    font-size: 0.85rem;
+    color: #333;
+  }
+  .submit {
+    transition: all 0.3s ease-in-out;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    min-width: 80px;
+    min-height: 36px;
+    color: #212121;
+    cursor: pointer;
+    background-color: #009900;
+    &:hover {
+      transition: all 0.3s ease-in-out;
+      background-color: lighten(#009900, 10%);
+    }
+  }
+}
+
+#topic3 {
+  font-size: 1.5em;
+  font-weight: 500;
+  margin: 1em auto;
+  color: #212121;
+}
+
+.subject {
+  font-size: 1.5em;
+  font-weight: 500;
+  margin: 1em auto;
+  color: #212121;
+  text-decoration: underline;
+}
+
+#result {
+  color: #333;
+  line-height: 2rem;
+  font-weight: bold;
+}
