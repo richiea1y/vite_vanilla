@@ -8,16 +8,41 @@ const fruitsArr = [
   { name: 'Cherry tomato', seasonal: true, price: '70' }
 ]
 
-const submit = () => {
-  // 請在以下區域作答，將click後的結果顯示在DOM上
-  const marketScope = document.getElementById('result_market');
-  const factoryScope = document.getElementById('result_factory');
+const marketScope = document.getElementById('result_market');
+const factoryScope = document.getElementById('result_factory');
 
-  let marketHTML = '';
-  let factoryHTML = '';
+let seasonal_arr = [];
+let unseasonal_arr = [];
+
+const submit = document.getElementById("submit")
+submit.addEventListener('click', () => {
+  // 請在以下區域作答，將click後的結果顯示在DOM上
+
+  // 遍歷陣列，將當季與非當季的水果分配到不同的空陣列
+  for (let i of fruitsArr) {
+    if (i.seasonal) {
+      seasonal_arr.push(i)
+    } else {
+      unseasonal_arr.push(i)
+    }
+  }
+
+  let marketHTML = fruitname(seasonal_arr);
+  let factoryHTML = fruitname(unseasonal_arr);
 
   marketScope.innerHTML = marketHTML;
   factoryScope.innerHTML = factoryHTML;
-  console.log('hihiihihih');
-}
+  // console.log(marketHTML, factoryHTML);
+});
 
+
+function fruitname(arr) {
+  let empty_arr = [];
+  // 遍歷所有陣列，將物件的名字拿到空陣列裡面
+  arr.forEach((i) => {
+    empty_arr.push(i.name);
+    // console.log(i.name);
+  })
+  // console.log(empty_arr.join(', '));
+  return empty_arr.join(', ');
+}

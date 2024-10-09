@@ -48,25 +48,31 @@ gameArr.push('薩爾達傳說');
 // unshift() - 在陣列最前端新增元素
 gameArr.unshift('魔物獵人RISE');
 // console.log('### gameArr (unshift): ', gameArr); // [ '魔物獵人RISE', '動物之森', '明星大亂鬥', '薩爾達傳說' ]
+
 // pop() - 移除陣列尾端元素
 // gameArr.pop();
 // console.log('### gameArr (pop): ', gameArr); // [ '魔物獵人RISE', '動物之森', '明星大亂鬥' ]
+
 // shift() - 移除陣列最前端元素
 // gameArr.shift();
 // console.log('### gameArr (shift): ', gameArr); // [ '動物之森', '明星大亂鬥' ]
+
 // 尋找陣列項目的索引值
 // const index = gameArr.indexOf('明星大亂鬥');
 // console.log('### gameArr (indexOf): ', index);
+
 // splice() - 刪除陣列中的元素
 // const target = gameArr.indexOf('魔物獵人RISE')
 // console.log('### gameArr (indexOf): ', target);
 // gameArr.splice(target, 2);
 // console.log('### gameArr (splice): ', gameArr);
+
 // 連接兩個不同的陣列
 // const arr_1 = [ '動物之森', '明星大亂鬥' ];
 // const arr_2 = [ '薩爾達傳說', '魔物獵人RISE' ];
 // const connectedArr = arr_1.concat(arr_2);
 // console.log('### arr_3 (concat): ', connectedArr);
+
 // find 與 filter
 const gameStoreArr = [
   { name: '動物之森', price: 2000 },
