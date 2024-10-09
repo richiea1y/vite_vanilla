@@ -11,12 +11,14 @@ const fruitsArr = [
 const marketScope = document.getElementById('result_market');
 const factoryScope = document.getElementById('result_factory');
 
-let seasonal_arr = [];
-let unseasonal_arr = [];
 
 const submit = document.getElementById("submit")
 submit.addEventListener('click', () => {
   // 請在以下區域作答，將click後的結果顯示在DOM上
+
+
+  let seasonal_arr = [];
+  let unseasonal_arr = [];
 
   // 遍歷陣列，將當季與非當季的水果分配到不同的空陣列
   for (let i of fruitsArr) {
@@ -27,18 +29,19 @@ submit.addEventListener('click', () => {
     }
   }
 
+
   let marketHTML = fruitname(seasonal_arr);
   let factoryHTML = fruitname(unseasonal_arr);
 
+
   marketScope.innerHTML = marketHTML;
   factoryScope.innerHTML = factoryHTML;
-  // console.log(marketHTML, factoryHTML);
+
 });
 
-
+// 遍歷所有陣列，將物件的名字拿到空陣列裡面
 function fruitname(arr) {
   let empty_arr = [];
-  // 遍歷所有陣列，將物件的名字拿到空陣列裡面
   arr.forEach((i) => {
     empty_arr.push(i.name);
     // console.log(i.name);
@@ -46,3 +49,4 @@ function fruitname(arr) {
   // console.log(empty_arr.join(', '));
   return empty_arr.join(', ');
 }
+
