@@ -31,8 +31,8 @@ submitBtn.addEventListener('click', () => {
   // 把節點的值除了任務數量全部輸入到物件屬性裡
   inputNodes.forEach((nodeElement) => {
     // 把 placeholder 值轉成小寫
-    const nodeName = String(nodeElement.placeholder);
-    const lowerNodeName = nodeName.toLowerCase();
+    const nodeName1 = String(nodeElement.placeholder);
+    const lowerNodeName = nodeName1.toLowerCase();
 
     // 如果這個迭代轉成小寫的 placeholder 的值有在物件裡，就賦值。
     if (`${lowerNodeName}` in obj) {
@@ -51,8 +51,12 @@ submitBtn.addEventListener('click', () => {
 
   // 重新計算總值
   for (let i = 0; i < Object.keys(obj).length; i++) {
+    // 輸出物件的 key 值 (score, special ...) 和對應的 index
     // console.log(objects[i]);
+
+    // 輸出物件對應 key 的值
     // console.log(obj[objects[i]]);
+
     if (i != 2) {
       obj[objects[i]] *= obj[objects[2]];
     }
@@ -80,9 +84,6 @@ const existingUser = {
   email: "johndoe@example.com"
 };
 
-// 深拷貝已存在的使用者資料
-const newUser = cloneDeep(existingUser);
-
 // 顯示原始使用者資料
 const resultText2 = document.getElementById("result2");
 resultText2.innerHTML = `
@@ -100,62 +101,61 @@ const submitBtn2 = document.getElementById('submitBtn2');
 // 新增表單輸入的 nodelist 綁定
 const inputNodes2 = document.querySelectorAll('#ass2 #work input');
 
+// 遍歷所有輸入字段，將已存在使用資料綁定在輸入欄位
+inputNodes2.forEach((nodeElement2) => {
+  // 透過 id 的值刪除不必要的字，拿來對應物件的 key
+  const nodeName2 = String(nodeElement2.id).replace("Val", "");
+
+  // 如果表單輸入框為空時
+  if (!nodeElement2.value) {
+    // Test past
+    // console.log('Value is empty');
+
+    // 如果是巢狀物件會等於 undefined
+    if (!existingUser[nodeName2]) {
+      console.log('Found Adress');
+      // 處理 address 物件
+      nodeElement2.value = existingUser.address[nodeName2]
+    } else if (existingUser[nodeName2] !== undefined) {
+      nodeElement2.value = existingUser[nodeName2];
+    }
+  }
+});
+
+
+// 深拷貝已存在的使用者資料
+const updatedUser = cloneDeep(existingUser);
+
+// 提交事件監聽
 submitBtn2.addEventListener('click', () => {
+  displayUdateUser(updatedUser);
+});
 
-  // 遍歷所有輸入字段
+
+// 可選：添加一個函數來顯示更新後的用戶數據
+function displayUdateUser(newUser) {
+  // 取得提交的值，將其綁定到新物件
+  // 遍歷所有輸入字段，將已存在使用資料綁定在輸入欄位
   inputNodes2.forEach((nodeElement2) => {
+    // 透過 id 的值刪除不必要的字，拿來對應物件的 key
     const nodeName2 = String(nodeElement2.id).replace("Val", "");
-    // 獲取並清理輸入值
-    const value = nodeElement2.value.trim();
 
-
-    // 根據字段名更新相應的屬性
-    if (nodeName2 === 'street' || nodeName2 === 'city') {
-      updateNestedObject(newUser, `address.${nodeName2}`, value);
-    } else if (['firstName', 'lastName', 'email'].includes(nodeName2)) {
-      updateNestedObject(newUser, nodeName2, value);
+    // 如果表單輸入框不為空時
+    if (nodeElement2.value) {
+      if (!updatedUser[nodeName2]) {
+        // 處理 address 物件
+        updatedUser.address[nodeName2] = nodeElement2.value;
+      } else if (updatedUser[nodeName2] !== undefined) {
+        updatedUser[nodeName2] = nodeElement2.value;
+      }
     }
   });
 
-  // 在這裡你可以對更新後的 newUser 對象進行進一步處理
-  // 例如，發送到服務器或更新UI
-  // console.log('更新後的用戶數據:', newUser);
-  displayUpdatedUser();
-});
-
-// 更新嵌套對象的輔助函數
-function updateNestedObject(obj, path, value) {
-  // 將路徑字符串分割成鍵數組
-  const keys = path.split('.');
-  // 從對象的根部開始
-  let current = obj;
-
-  // 遍歷除最後一個鍵之外的所有鍵
-  for (let i = 0; i < keys.length - 1; i++) {
-    // 如果當前鍵不存在，則創建一個空對象
-    if (!(keys[i] in current)) {
-      current[keys[i]] = {};
-    }
-    // 移動到下一層
-    current = current[keys[i]];
-  }
-
-  // 獲取路徑中的最後一個鍵
-  const lastKey = keys[keys.length - 1];
-
-  // 只有當值不是 undefined 且不是空字符串時才更新
-  if (value !== undefined && value !== '') {
-    current[lastKey] = value;
-  }
-}
-
-// 可選：添加一個函數來顯示更新後的用戶數據
-function displayUpdatedUser() {
   resultText2.innerHTML = `
-  First Name: ${newUser.firstName}<br/>
-  Last Name: ${newUser.lastName}<br/>
-  Street: ${newUser.address.street}<br/>
-  City: ${newUser.address.city}<br/>
-  Email: ${newUser.email}
+  First Name: ${updatedUser.firstName}<br/>
+  Last Name: ${updatedUser.lastName}<br/>
+  Street: ${updatedUser.address.street}<br/>
+  City: ${updatedUser.address.city}<br/>
+  Email: ${updatedUser.email}
   `;
 }
