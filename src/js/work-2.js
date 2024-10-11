@@ -142,20 +142,20 @@ function displayUdateUser(newUser) {
 
     // 如果表單輸入框不為空時
     if (nodeElement2.value) {
-      if (!updatedUser[nodeName2]) {
+      if (!newUser[nodeName2]) {
         // 處理 address 物件
-        updatedUser.address[nodeName2] = nodeElement2.value;
-      } else if (updatedUser[nodeName2] !== undefined) {
-        updatedUser[nodeName2] = nodeElement2.value;
+        newUser.address[nodeName2] = nodeElement2.value;
+      } else if (newUser[nodeName2] !== undefined) {
+        newUser[nodeName2] = nodeElement2.value;
       }
     }
   });
 
   resultText2.innerHTML = `
-  First Name: ${updatedUser.firstName}<br/>
-  Last Name: ${updatedUser.lastName}<br/>
-  Street: ${updatedUser.address.street}<br/>
-  City: ${updatedUser.address.city}<br/>
-  Email: ${updatedUser.email}
+  First Name: ${newUser.firstName}<br/>
+  Last Name: ${newUser.lastName}<br/>
+  Street: ${newUser.address.street}<br/>
+  City: ${newUser.address.city}<br/>
+  Email: ${newUser.email}
   `;
 }
