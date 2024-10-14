@@ -5,7 +5,8 @@ const pageTitleStrategy = {
   'products.html': () => 'RWD: Products',
   'js-day-1.html': () => 'Javascript DAY-1: 資料型別與型別轉換',
   'js-day-2.html': () => 'Javascript DAY-2: 變數、作用域、運算子與物件',
-  'js-day-3.html': () => 'Javascript Day-3: 函式、陣列、判別式與迴圈',
+  'js-day-3.html': () => 'Javascript Day-3: 迴圈與陣列(一)',
+  'js-day-4.html': () => 'Javascript Day-4: 陣列(二)、閉包、遞迴',
   'default': () => 'Welcome to Our Website',  // 預設標題
 };
 
@@ -56,7 +57,10 @@ appContent.insertAdjacentHTML('afterbegin', `
         <a href="js-day-2.html">Day-2: 變數、作用域、運算子與物件</a>
       </li>
       <li>
-        <a href="js-day-3.html">Day-3: 函式、陣列、判別式與迴圈</a>
+        <a href="js-day-3.html">Day-3: 迴圈與陣列(一)</a>
+      </li>
+      <li>
+        <a href="js-day-4.html">Day-4: 陣列(二)、閉包、遞迴</a>
       </li>
     </ul>
   </div>
