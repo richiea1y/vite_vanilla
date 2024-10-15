@@ -5,7 +5,8 @@ const pageTitleStrategy = {
   'products.html': () => 'RWD: Products',
   'js-day-1.html': () => 'Javascript DAY-1: 資料型別與型別轉換',
   'js-day-2.html': () => 'Javascript DAY-2: 變數、作用域、運算子與物件',
-  'js-day-3.html': () => 'Javascript Day-3: 函式、陣列、判別式與迴圈',
+  'js-day-3.html': () => 'Javascript Day-3: 迴圈與陣列(一)',
+  'js-day-3-dijikstra.html': () => 'Javascript Day-3: Dijkstra\'s algorithm',
   'default': () => 'Welcome to Our Website',  // 預設標題
 };
 
