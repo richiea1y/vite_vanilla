@@ -57,7 +57,7 @@ appContent.insertAdjacentHTML('afterbegin', `
         <a href="js-day-2.html">Day-2: 變數、作用域、運算子與物件</a>
       </li>
       <li>
-        <a href="js-day-3.html">Day-3: 函式、陣列、判別式與迴圈</a>
+        <a href="js-day-3.html">Day-3: 迴圈與陣列(一)</a>
       </li>
       <li>
         <a href="js-day-3-dijikstra.html">Day-3: Dijkstra\'s algorithm</a>
