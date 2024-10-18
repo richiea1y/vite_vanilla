@@ -6,7 +6,8 @@ const pageTitleStrategy = {
   'js-day-1.html': () => 'Javascript DAY-1: 資料型別與型別轉換',
   'js-day-2.html': () => 'Javascript DAY-2: 變數、作用域、運算子與物件',
   'js-day-3.html': () => 'Javascript Day-3: 迴圈與陣列(一)',
-  'js-day-3-dijikstra.html': () => 'Javascript Day-3: Dijkstra\'s algorithm',
+  'js-day-3-dijikstra-v1.html': () => 'Javascript Day-3: Dijkstra\'s algorithm V.1 (Original-Version)',
+  'js-day-3-dijikstra-v2.html': () => 'Javascript Day-3: Dijkstra\'s algorithm V.2 (Class-Version)',
   'js-day-4.html': () => 'Javascript Day-4: 陣列(二)、閉包、遞迴',
   'default': () => 'Welcome to Our Website',  // 預設標題
 };
@@ -61,7 +62,10 @@ appContent.insertAdjacentHTML('afterbegin', `
         <a href="js-day-3.html">Day-3: 迴圈與陣列(一)</a>
       </li>
       <li>
-        <a href="js-day-3-dijikstra.html">Day-3: Dijkstra\'s algorithm</a>
+        <a href="js-day-3-dijikstra-v1.html">Day-3: Dijkstra\'s algorithm V.1</a>
+      </li>
+      <li>
+        <a href="js-day-3-dijikstra-v2.html">Day-3: Dijkstra\'s algorithm V.2</a>
       </li>
       <li>
         <a href="js-day-4.html">Day-4: 陣列(二)、閉包、遞迴</a>
