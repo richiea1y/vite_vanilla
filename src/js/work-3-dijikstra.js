@@ -129,20 +129,23 @@ function findBestTravelRoute(spots, start, end, costWeight = 0.7, ratingWeight =
     // 更新相鄰景點的距離，遍歷當前節點的所有相鄰節點
     // 我們不斷地尋找更短的路徑。每次我們訪問一個新節點時,我們都檢查是否可以通過這個新節點找到到達其他節點的更短路徑。如果找到了,我們就更新這些路徑。
     for (let neighbor in spots[current].connections) {
-      // 檢查相鄰節點是否未訪問
-      if (unvisited.has(neighbor)) {
-        // 計算到相鄰景點的新距離
-        const cost = calculateCost(spots, current, neighbor, costWeight, ratingWeight);
-        // 新距離是從起點到當前節點的距離加上從當前節點到相鄰節點的成本。
-        const newDistance = distances[current].add(cost);
 
-        // 如果新距離更短,更新距離和前驅節點
-        // 如果新計算的距離小於之前記錄的到達該相鄰節點的距離,我們就更新距離並記錄前驅節點。
-        if (newDistance.lessThan(distances[neighbor])) {
-          distances[neighbor] = newDistance;
-          previous[neighbor] = current;
-        }
-      }
+      // 每個 continue 語句都明確地表示了我們要跳過當前迭代的條件，使得邏輯流程更加清晰。這種重構方法被稱為"早期返回"或"守衛語句"模式，它可以幫助減少代碼的複雜度和提高可讀性。
+
+      // 檢查鄰居節點是否已經被訪問過。如果已訪問，我們就跳過這個節點，繼續下一個迭代。
+      if (!unvisited.has(neighbor)) continue;
+
+      // 計算到相鄰景點的新距離
+      const cost = calculateCost(spots, current, neighbor, costWeight, ratingWeight);
+      // 新距離是從起點到當前節點的距離加上從當前節點到相鄰節點的成本。
+      const newDistance = distances[current].add(cost);
+
+      // 如果新距離不小於當前記錄的距離，我們也跳過這個節點，繼續下一個迭代。
+      if (!newDistance.lessThan(distances[neighbor])) continue;
+
+      // 只有當新距離小於當前記錄的距離時，我們才更新距離和前驅節點。
+      distances[neighbor] = newDistance;
+      previous[neighbor] = current;
     }
   }
 
