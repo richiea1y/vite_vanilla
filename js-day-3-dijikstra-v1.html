@@ -9,34 +9,38 @@
 </head>
 <style>
   .spot-button {
-      margin: 5px;
-      padding: 10px;
-      background-color: #666;
-      border-radius: 6px;
+    margin: 5px;
+    padding: 10px;
+    background-color: #666;
+    border-radius: 6px;
   }
+
   .selected {
-      background-color: #4CAF50;
-      color: white;
+    background-color: #4CAF50;
+    color: white;
   }
+
   .calc-button:disabled {
-      background-color: #ccc;
-      color: #666;
+    background-color: #ccc;
+    color: #666;
   }
+
   .calc-button {
-      margin: 10px;
-      padding: 10px;
-      background-color: #696eff;
-      color: white;
-      border: none;
-      border-radius: 6px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #696eff;
+    color: white;
+    border: none;
+    border-radius: 6px;
   }
+
   .clear-button {
-      margin: 10px;
-      padding: 10px;
-      background-color: #ff6969;
-      color: white;
-      border: none;
-      border-radius: 6px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #ff6969;
+    color: white;
+    border: none;
+    border-radius: 6px;
   }
 </style>
 <div id="app">
@@ -59,18 +63,18 @@
   <div id="spots-container">
     <h2>選擇起點和終點：</h2>
     <!-- 景點按鈕將在這裡動態生成 -->
-</div>
+  </div>
 
-<button id="calculate-route" class="calc-button" disabled>計算最佳路線</button>
-<button id="clear-selection" class="clear-button">清除選擇</button>
+  <button id="calculate-route" class="calc-button" disabled>計算最佳路線</button>
+  <button id="clear-selection" class="clear-button">清除選擇</button>
 
-<div id="output">
+  <div id="output">
     <h2>輸出結果：</h2>
     <div id="result"></div>
-</div>
+  </div>
 </div>
 
 <script type="module" src="/main.js"></script>
-<script type="module" src="src/js/work-3-dijikstra.js"></script>
+<script type="module" src="src/js/work-3-dijikstra-v1.js"></script>
 
 </html>
