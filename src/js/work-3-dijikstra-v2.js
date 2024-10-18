@@ -76,18 +76,28 @@ function clearSelection() {
 
 /* ---------------------------- Assignment Start ---------------------------- */
 
-// 計算綜合成本，考慮了交通時間、平均消費和景點評分
+// // 計算綜合成本，考慮了交通時間、平均消費和景點評分
+// function calculateCost(spots, from, to, costWeight, ratingWeight) {
+//   const travelTime = spots[from].connections[to];
+//   const avgCost = (spots[from].avgCost + spots[to].avgCost) / 2;
+//   const avgRating = (spots[from].rating + spots[to].rating) / 2;
+
+//   // 兩個部分的考量：成本＋評分。 成本包含交通時間和平均成本；評分部分
+//   return new Decimal(costWeight).mul(travelTime + avgCost).add(
+//     // 乘以 ratingWeight 是為了根據用戶設定的權重來調整評分的重要性
+//     // 成本越低評分越高，用 6 減去評分(假設最高評分是 5)，乘以 100 是為了將評分的影響放大,使其與成本在數量級上更接近
+//     new Decimal(ratingWeight).mul(6 - avgRating).mul(100)
+//   );
+// }
+
 function calculateCost(spots, from, to, costWeight, ratingWeight) {
   const travelTime = spots[from].connections[to];
-  const avgCost = (spots[from].avgCost + spots[to].avgCost) / 2;
-  const avgRating = (spots[from].rating + spots[to].rating) / 2;
+  const spotCost = spots[to].avgCost;
+  const rating = spots[to].rating;
 
-  // 兩個部分的考量：成本＋評分。 成本包含交通時間和平均成本；評分部分
-  return new Decimal(costWeight).mul(travelTime + avgCost).add(
-    // 乘以 ratingWeight 是為了根據用戶設定的權重來調整評分的重要性
-    // 成本越低評分越高，用 6 減去評分(假設最高評分是 5)，乘以 100 是為了將評分的影響放大,使其與成本在數量級上更接近
-    new Decimal(ratingWeight).mul(6 - avgRating).mul(100)
-  );
+  return new Decimal(travelTime)
+    .add(new Decimal(spotCost).mul(costWeight))
+    .sub(new Decimal(rating).mul(ratingWeight).mul(10));
 }
 
 // TODO: 實現 findBestTravelRoute 函數
@@ -129,23 +139,18 @@ function findBestTravelRoute(spots, start, end, costWeight = 0.7, ratingWeight =
     // 更新相鄰景點的距離，遍歷當前節點的所有相鄰節點
     // 我們不斷地尋找更短的路徑。每次我們訪問一個新節點時,我們都檢查是否可以通過這個新節點找到到達其他節點的更短路徑。如果找到了,我們就更新這些路徑。
     for (let neighbor in spots[current].connections) {
-
-      // 每個 continue 語句都明確地表示了我們要跳過當前迭代的條件，使得邏輯流程更加清晰。這種重構方法被稱為"早期返回"或"守衛語句"模式，它可以幫助減少代碼的複雜度和提高可讀性。
-
       // 檢查鄰居節點是否已經被訪問過。如果已訪問，我們就跳過這個節點，繼續下一個迭代。
       if (!unvisited.has(neighbor)) continue;
 
-      // 計算到相鄰景點的新距離
-      const cost = calculateCost(spots, current, neighbor, costWeight, ratingWeight);
       // 新距離是從起點到當前節點的距離加上從當前節點到相鄰節點的成本。
+      const cost = calculateCost(spots, current, neighbor, costWeight, ratingWeight);
       const newDistance = distances[current].add(cost);
 
       // 如果新距離不小於當前記錄的距離，我們也跳過這個節點，繼續下一個迭代。
-      if (!newDistance.lessThan(distances[neighbor])) continue;
-
-      // 只有當新距離小於當前記錄的距離時，我們才更新距離和前驅節點。
-      distances[neighbor] = newDistance;
-      previous[neighbor] = current;
+      if (newDistance.lessThan(distances[neighbor])) {
+        distances[neighbor] = newDistance;
+        previous[neighbor] = current;
+      }
     }
   }
 
@@ -169,16 +174,16 @@ function findBestTravelRoute(spots, start, end, costWeight = 0.7, ratingWeight =
   for (let i = 0; i < path.length - 1; i++) {
     // 從一個景點到下一個景點的交通時間(或成本) + 當前景點的平均消費。
     // 我們將交通時間(或成本)和景點的平均消費相加,得到從一個景點到達下一個景點並遊覽的總成本。
-    actualCost = actualCost.add(spots[path[i]].connections[path[i + 1]] + spots[path[i]].avgCost);
-    // 累加每個景點的評分。
-    totalRating = totalRating.add(spots[path[i]].rating);
+    const from = path[i];
+    const to = path[i + 1];
+    actualCost = actualCost.add(spots[from].connections[to])
+      .add(spots[to].avgCost)
+      .sub(spots[to].rating * ratingWeight * 10);
+    totalRating = totalRating.add(spots[to].rating);
   }
-  // 這是為了加上最後一個景點的平均消費,因為循環中沒有計算到最後一個景點的消費。
-  actualCost = actualCost.add(spots[path[path.length - 1]].avgCost);
-  totalRating = totalRating.add(spots[path[path.length - 1]].rating);
 
   // 將總評分除以景點數量,得到平均評分。
-  const averageRating = totalRating.div(path.length);
+  const averageRating = totalRating.div(path.length - 1);
 
   return {
     path,
