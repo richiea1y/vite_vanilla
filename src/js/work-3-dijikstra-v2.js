@@ -139,6 +139,9 @@ function findBestTravelRoute(spots, start, end, costWeight = 0.7, ratingWeight =
     // 更新相鄰景點的距離，遍歷當前節點的所有相鄰節點
     // 我們不斷地尋找更短的路徑。每次我們訪問一個新節點時,我們都檢查是否可以通過這個新節點找到到達其他節點的更短路徑。如果找到了,我們就更新這些路徑。
     for (let neighbor in spots[current].connections) {
+
+      // 每個 continue 語句都明確地表示了我們要跳過當前迭代的條件，使得邏輯流程更加清晰。這種重構方法被稱為"早期返回"或"守衛語句"模式，它可以幫助減少代碼的複雜度和提高可讀性。
+
       // 檢查鄰居節點是否已經被訪問過。如果已訪問，我們就跳過這個節點，繼續下一個迭代。
       if (!unvisited.has(neighbor)) continue;
 
