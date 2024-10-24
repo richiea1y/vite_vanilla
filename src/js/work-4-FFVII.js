@@ -1,3 +1,20 @@
+// Fix: Define attackMethods as as property of the window object. Originally attackMethods is defined in a local scope, which makes it inaccessible to the inline onclick handlers.
+window.attackMethods = (playerIndex, playerSkill) => {
+  const parsePlayerName = () => {
+    return players[playerIndex].name
+  }
+  const parsePlayerSkill = () => {
+    return players[playerIndex].skill[playerSkill].name
+  }
+  const resultScope = document.getElementById('result')
+
+  resultScope.innerHTML = `${parsePlayerName()} 對 ${mobs[0].name} 使出 ${parsePlayerSkill()} 造成了 ${''} 傷害！`
+  if (parsePlayerSkill() == '全體恢復(大)') {
+    resultScope.innerHTML = `${parsePlayerName()} 對 我方成員 使出 ${parsePlayerSkill()} 恢復了 ${''} HP！`
+  }
+}
+
+
 const players = [
   {
     name: 'Cloud',
@@ -134,18 +151,17 @@ createPlayers()
 creatMobs()
 
 // 請在以下開始作答-------------->
-const attackMethods = (playerIndex, playerSkill) => {
-  const parsePlayerName = () => {
-    return players[playerIndex].name
-  }
-  const parsePlayerSkill = () => {
-    return players[playerIndex].skill[playerSkill].name
-  }
-  const resultScope = document.getElementById('result')
 
-  resultScope.innerHTML = `${parsePlayerName()} 對 ${mobs[0].name} 使出 ${parsePlayerSkill()} 造成了 ${''} 傷害！`
-  if (parsePlayerSkill() == '全體恢復(大)') {
-    resultScope.innerHTML = `${parsePlayerName()} 對 我方成員 使出 ${parsePlayerSkill()} 恢復了 ${''} HP！`
-  }
-}
+
+
+
+
+// 把 DOM 需要綁定的元素抽出來：狀態＆技能
+// 偵測點擊的技能
+const gameSkills = document.querySelectorAll('button');
+gameSkills.forEach((item) => {
+  console.log(item.textContent);
+  console.log(item);
+});
+
 // -------------->
