@@ -1,19 +1,4 @@
-// Fix: Define attackMethods as as property of the window object. Originally attackMethods is defined in a local scope, which makes it inaccessible to the inline onclick handlers.
-window.attackMethods = (playerIndex, playerSkill) => {
-  const parsePlayerName = () => {
-    return players[playerIndex].name
-  }
-  const parsePlayerSkill = () => {
-    return players[playerIndex].skill[playerSkill].name
-  }
-  const resultScope = document.getElementById('result')
-
-  resultScope.innerHTML = `${parsePlayerName()} 對 ${mobs[0].name} 使出 ${parsePlayerSkill()} 造成了 ${''} 傷害！`
-  if (parsePlayerSkill() == '全體恢復(大)') {
-    resultScope.innerHTML = `${parsePlayerName()} 對 我方成員 使出 ${parsePlayerSkill()} 恢復了 ${''} HP！`
-  }
-}
-
+import { cloneDeep } from 'lodash';
 
 const players = [
   {
@@ -63,26 +48,31 @@ const mobs = [
     skill: [{ name: 'メガフレア（超巨爆）', cost: 0, damage: 3000 }]
   }
 ]
+
+// Deep clone objects
+let gamePlayer = cloneDeep(players);
+let gameMobs = cloneDeep(mobs);
+
 const creatMobs = () => {
   let html = ''
-  for (let i in mobs) {
+  for (let i in gameMobs) {
     html += `
       <div class="cards">
         <div class="row horizontal space">
-          <b>${mobs[i].name}</b>
-          <span>${mobs[i].class}</span>
+          <b>${gameMobs[i].name}</b>
+          <span>${gameMobs[i].class}</span>
         </div>
         <div class="row horizontal space">
           <b>HP</b>
-          <span>${mobs[i].hp}</span>
+          <span>${gameMobs[i].hp}</span>
         </div>
         <div class="row horizontal space">
           <b>MP</b>
-          <span>${mobs[i].mp}</span>
+          <span>${gameMobs[i].mp}</span>
         </div>
         <div class="row horizontal space">
           <b>狀態</b>
-          <span>${mobs[i].status}</span>
+          <span>${gameMobs[i].status}</span>
         </div>
       </div>
     `
@@ -96,17 +86,16 @@ const createPlayers = () => {
   let btnHTML = ''
   let buttonName = []
   let skills = []
-  for (let i in players) {
-    skills.push(players[i].skill.map(item => {
+  for (let i in gamePlayer) {
+    skills.push(gamePlayer[i].skill.map(item => {
       return item.name
     }))
   }
-  //console.log(skills)
 
-  for (let i in players) {
+  for (let i in gamePlayer) {
     const createButton = () => {
       let html = ''
-      let result = players[i].skill.map(item => {
+      let result = gamePlayer[i].skill.map(item => {
         return item.name
       })
       for (let j in result) {
@@ -118,20 +107,20 @@ const createPlayers = () => {
       <div class="cards row horizontal">
         <div class="row vertical" data-space="space-next">
           <div class="row horizontal space">
-            <b>${players[i].name}</b>
-            <span>${players[i].class}</span>
+            <b>${gamePlayer[i].name}</b>
+            <span>${gamePlayer[i].class}</span>
           </div>
           <div class="row horizontal space">
             <b>HP</b>
-            <span>${players[i].hp}</span>
+            <span>${gamePlayer[i].hp}</span>
           </div>
           <div class="row horizontal space">
             <b>MP</b>
-            <span>${players[i].mp}</span>
+            <span>${gamePlayer[i].mp}</span>
           </div>
           <div class="row horizontal space">
             <b>狀態</b>
-            <span>${players[i].status}</span>
+            <span>${gamePlayer[i].status}</span>
           </div>
         </div>
         <div class="row vertical">
@@ -152,16 +141,173 @@ creatMobs()
 
 // 請在以下開始作答-------------->
 
+// 添加遊戲狀態追踪
+let isGameOver = false;
+
+// State management functions
+const updateGameState = () => {
+  updatePlayersState();
+  updateMobsState();
+  checkBattleConditions();
+  renderUI();
+}
+
+const updatePlayersState = () => {
+  gamePlayer.forEach(player => {
+    // Clamp HP between 0 and max HP
+    player.hp = Math.max(0, Math.min(player.hp, getMaxHp(player.name)));
+    // Clamp MP between 0 and max MP
+    player.mp = Math.max(0, Math.min(player.mp, getMaxMp(player.name)));
+    // Update status
+    player.status = player.hp <= 0 ? '無法戰鬥' : '正常';
+  });
+}
+
+const updateMobsState = () => {
+  gameMobs.forEach(mob => {
+    mob.hp = Math.max(0, mob.hp);
+    mob.status = mob.hp <= 0 ? '已擊敗' : '不爽';
+  });
+}
+
+const checkBattleConditions = () => {
+  const allPlayersDead = gamePlayer.every(player => player.hp <= 0);
+  const bossDefeated = gameMobs[0].hp <= 0;
+
+  if (allPlayersDead || bossDefeated) {
+    isGameOver = true; // 設置遊戲結束狀態
+    showBattleResult(bossDefeated ? 'victory' : 'defeat');
+  }
+}
+
+const renderUI = () => {
+  // 重新渲染玩家和怪物狀態
+  createPlayers();
+  creatMobs();
+}
+
+const showBattleResult = (result) => {
+  const resultScope = document.getElementById('result');
+  const buttonHtml = '<button onclick="window.resetGame()" class="reset-button" style="opacity: 1; cursor: pointer;">重新開始</button>';
+
+  if (result === 'victory') {
+    resultScope.innerHTML = `
+      <div class="battle-result">
+        <p>恭喜擊敗${gameMobs[0].name}！</p>
+        ${buttonHtml}
+      </div>
+    `;
+  } else {
+    resultScope.innerHTML = `
+      <div class="battle-result">
+        <p>戰鬥失敗...</p>
+        ${buttonHtml}
+      </div>
+    `;
+  }
+}
 
 
+// Helper functions
+const getMaxHp = (playerName) => {
+  const originalPlayer = players.find(p => p.name === playerName);
+  return originalPlayer ? originalPlayer.hp : 0;
+}
 
+const getMaxMp = (playerName) => {
+  const originalPlayer = players.find(p => p.name === playerName);
+  return originalPlayer ? originalPlayer.mp : 0;
+}
 
-// 把 DOM 需要綁定的元素抽出來：狀態＆技能
-// 偵測點擊的技能
-const gameSkills = document.querySelectorAll('button');
-gameSkills.forEach((item) => {
-  console.log(item.textContent);
-  console.log(item);
-});
+const resetGame = () => {
+  // 重置遊戲狀態
+  gamePlayer = cloneDeep(players);
+  gameMobs = cloneDeep(mobs);
+  isGameOver = false; // 重置遊戲結束標記
 
+  // 清空結果顯示
+  document.getElementById('result').innerHTML = '';
+
+  // 重新渲染 UI
+  createPlayers();
+  creatMobs();
+}
+
+// 為了確保 resetGame 可以從 HTML 中調用
+window.resetGame = resetGame;
+
+// Fix: Define attackMethods as as property of the window object. Originally attackMethods is defined in a local scope, which makes it inaccessible to the inline onclick handlers.
+window.attackMethods = (playerIndex, playerSkill) => {
+  // 如果遊戲已經結束，直接返回
+  if (isGameOver) {
+    return;
+  }
+
+  const player = gamePlayer[playerIndex];
+  const skill = player.skill[playerSkill];
+  const resultScope = document.getElementById('result');
+
+  // Check if player has enough MP
+  if (skill.cost > player.mp) {
+    resultScope.innerHTML = `${player.name} 的 MP 不足！`;
+    return;
+  }
+
+  // Deduct MP cost
+  player.mp -= skill.cost;
+
+  // Apply skill effects
+  if (skill.name === 'ケアルガ（全體恢復）') {
+    handleHealing(player, skill);
+  } else {
+    handleAttack(player, skill);
+  }
+
+  // Update game state
+  updateGameState();
+}
+
+const handleHealing = (player, skill) => {
+  const resultScope = document.getElementById('result');
+  resultScope.innerHTML = `${player.name} 對 我方成員 使出 ${skill.name} 恢復了 ${skill.damage} HP！`;
+
+  gamePlayer.forEach(target => {
+    if (target.hp > 0) {
+      target.hp = Math.min(getMaxHp(target.name), target.hp + skill.damage);
+    }
+  });
+}
+
+const handleAttack = (player, skill) => {
+  const boss = gameMobs[0];
+  const resultScope = document.getElementById('result');
+  resultScope.innerHTML = `${player.name} 對 ${boss.name} 使出 ${skill.name} 造成了 ${skill.damage} 傷害！`;
+
+  const previousHp = boss.hp;
+  boss.hp -= skill.damage;
+
+  // Check for boss counter-attack
+  if (boss.hp > 0 && Math.floor(previousHp / 2000) > Math.floor(boss.hp / 2000)) {
+    executeBossAttack();
+  }
+}
+
+const executeBossAttack = () => {
+  // 如果遊戲已經結束，不執行攻擊
+  if (isGameOver) {
+    return;
+  }
+
+  const boss = gameMobs[0];
+  const skill = boss.skill[0];
+  const resultScope = document.getElementById('result');
+
+  gamePlayer.forEach(player => {
+    if (player.hp > 0) {
+      player.hp = Math.max(0, player.hp - skill.damage);
+    }
+  });
+
+  resultScope.innerHTML += `<br>${boss.name} 反擊！使出 ${skill.name} 對我方全體造成 ${skill.damage} 傷害！`;
+}
 // -------------->
