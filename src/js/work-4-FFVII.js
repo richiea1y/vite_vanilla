@@ -188,7 +188,7 @@ const renderUI = () => {
 
 const showBattleResult = (result) => {
   const resultScope = document.getElementById('result');
-  const buttonHtml = '<button onclick="window.resetGame()" class="reset-button" style="opacity: 1; cursor: pointer;">重新開始</button>';
+  const buttonHtml = '<button onclick="window.resetGame()" class="reset-button" style="background-color: #ff4444;color: white;border: 2px solid #cc0000;padding: 8px 16px;border-radius: 4px;cursor: pointer;font-weight: bold;transition: background-color 0.3s;box-shadow: 0 2px 4px rgba(0,0,0,0.2);">重新開始</button>';
 
   if (result === 'victory') {
     resultScope.innerHTML = `
