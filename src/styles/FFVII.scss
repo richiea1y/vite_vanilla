@@ -163,3 +163,65 @@
   line-height: 2rem;
   font-weight: bold;
 }
+
+/* 訊息容器樣式 */
+.message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* 戰鬥訊息樣式 */
+.battle-message {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+/* 戰鬥結果樣式 */
+.battle-result {
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #f11f10;
+}
+
+/* 按鈕容器樣式 */
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.reset-button {
+  background-color: #ff4444;
+  color: white;
+  margin: 0 auto;
+  border: 2px solid #cc0000;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 治療數字 */
+.heal-number {
+  color: #28a745; /* 綠色 */
+  font-weight: bold;
+  padding: 0 3px;
+  font-size: 1.1em; // 略微放大數字
+  text-shadow: 0 0 1px rgba(0, 123, 255, 0.3); // 添加細微陰影
+}
+
+/* 傷害數字樣式 */
+.damage-number {
+  color: #007bff; /* 藍色 */
+  font-weight: bold;
+  padding: 0 3px;
+  font-size: 1.1em; // 略微放大數字
+  text-shadow: 0 0 1px rgba(0, 123, 255, 0.3); // 添加細微陰影
+}

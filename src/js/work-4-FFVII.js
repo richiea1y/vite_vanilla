@@ -175,7 +175,7 @@ const checkBattleConditions = () => {
   const bossDefeated = gameMobs[0].hp <= 0;
 
   if (allPlayersDead || bossDefeated) {
-    isGameOver = true; // 設置遊戲結束狀態
+    isGameOver = true;
     showBattleResult(bossDefeated ? 'victory' : 'defeat');
   }
 }
@@ -188,23 +188,22 @@ const renderUI = () => {
 
 const showBattleResult = (result) => {
   const resultScope = document.getElementById('result');
-  const buttonHtml = '<button onclick="window.resetGame()" class="reset-button" style="background-color: #ff4444;color: white;border: 2px solid #cc0000;padding: 8px 16px;border-radius: 4px;cursor: pointer;font-weight: bold;transition: background-color 0.3s;box-shadow: 0 2px 4px rgba(0,0,0,0.2);">重新開始</button>';
 
-  if (result === 'victory') {
-    resultScope.innerHTML = `
-      <div class="battle-result">
-        <p>恭喜擊敗${gameMobs[0].name}！</p>
-        ${buttonHtml}
-      </div>
-    `;
-  } else {
-    resultScope.innerHTML = `
-      <div class="battle-result">
-        <p>戰鬥失敗...</p>
-        ${buttonHtml}
-      </div>
-    `;
-  }
+  // 創建重新開始按鈕
+  const resetButton = document.createElement('button');
+  resetButton.textContent = '重新開始';
+  resetButton.className = 'reset-button';
+  resetButton.addEventListener('click', resetGame);
+
+  // 創建結果文字
+  const messageText = result === 'victory'
+    ? `恭喜擊敗${gameMobs[0].name}！`
+    : '戰鬥失敗...';
+
+  // 清空並設置新內容
+  resultScope.innerHTML = '';
+  resultScope.insertAdjacentHTML('beforeend', `<p>${messageText}</p>`);
+  resultScope.appendChild(resetButton);
 }
 
 
@@ -220,10 +219,13 @@ const getMaxMp = (playerName) => {
 }
 
 const resetGame = () => {
+
+  // 重置遊戲結束標記
+  isGameOver = false;
+
   // 重置遊戲狀態
   gamePlayer = cloneDeep(players);
   gameMobs = cloneDeep(mobs);
-  isGameOver = false; // 重置遊戲結束標記
 
   // 清空結果顯示
   document.getElementById('result').innerHTML = '';
@@ -234,7 +236,7 @@ const resetGame = () => {
 }
 
 // 為了確保 resetGame 可以從 HTML 中調用
-window.resetGame = resetGame;
+// window.resetGame = resetGame;
 
 // Fix: Define attackMethods as as property of the window object. Originally attackMethods is defined in a local scope, which makes it inaccessible to the inline onclick handlers.
 window.attackMethods = (playerIndex, playerSkill) => {
@@ -257,50 +259,113 @@ window.attackMethods = (playerIndex, playerSkill) => {
   player.mp -= skill.cost;
 
   // Apply skill effects
-  if (skill.name === 'ケアルガ（全體恢復）') {
+  if (skill.id === 5) {
     handleHealing(player, skill);
   } else {
     handleAttack(player, skill);
   }
-
-  // Update game state
-  updateGameState();
 }
 
 const handleHealing = (player, skill) => {
-  const resultScope = document.getElementById('result');
-  resultScope.innerHTML = `${player.name} 對 我方成員 使出 ${skill.name} 恢復了 ${skill.damage} HP！`;
-
   gamePlayer.forEach(target => {
     if (target.hp > 0) {
       target.hp = Math.min(getMaxHp(target.name), target.hp + skill.damage);
     }
   });
+
+  // 更新遊戲狀態
+  updateGameState();
+
+  // 顯示治療訊息
+  const healMessage = `${player.name} 對 我方成員 使出 ${skill.name} 恢復了 <span class="heal-number">${skill.damage}</span> HP！`;
+  displayBattleAndResult(healMessage);
 }
 
 const handleAttack = (player, skill) => {
   const boss = gameMobs[0];
-  const resultScope = document.getElementById('result');
-  resultScope.innerHTML = `${player.name} 對 ${boss.name} 使出 ${skill.name} 造成了 ${skill.damage} 傷害！`;
 
-  const previousHp = boss.hp;
+  // 記錄攻擊前的 HP 區間
+  const previousSection = Math.ceil(boss.hp / 2000);
+
+  // 造成傷害
   boss.hp -= skill.damage;
 
-  // Check for boss counter-attack
-  if (boss.hp > 0 && Math.floor(previousHp / 2000) > Math.floor(boss.hp / 2000)) {
-    executeBossAttack();
+  // 計算攻擊後的 HP 區間
+  const currentSection = Math.ceil(boss.hp / 2000);
+
+  // 顯示攻擊訊息，將傷害數字用 span 包裝
+  let battleMessage = `${player.name} 對 ${boss.name} 使出 ${skill.name} 造成了 <span class="damage-number">${skill.damage}</span> 傷害！`;
+
+  // 檢查是否會觸發 BOSS 反擊（檢查是否跨越 2000 點 HP 的區間）
+  // 如果觸發 BOSS 反擊，添加反擊訊息
+  if (boss.hp > 0 && currentSection < previousSection) {
+    battleMessage += executeBossAttack();
   }
+
+  // 更新遊戲狀態
+  updateGameState();
+
+  // 檢查戰鬥結果並顯示完整訊息
+  displayBattleAndResult(battleMessage);
+}
+
+// 新增的顯示函數，整合戰鬥訊息和結果
+const displayBattleAndResult = (battleMessage) => {
+  const resultScope = document.getElementById('result');
+  const allPlayersDead = gamePlayer.every(player => player.hp <= 0);
+  const bossDefeated = gameMobs[0].hp <= 0;
+
+  // 使用帶有樣式的 div 包裝戰鬥訊息
+  let fullMessage = `<div class="battle-message">${battleMessage}</div>`;
+
+  // 如果戰鬥結束，添加結果訊息
+  if (allPlayersDead || bossDefeated) {
+    isGameOver = true;
+    const resultMessage = bossDefeated ?
+      `<div class="battle-result">恭喜擊敗${gameMobs[0].name}！</div>` :
+      '<div class="battle-result">戰鬥失敗...</div>';
+
+    // 使用容器包裝所有內容
+    fullMessage = `
+      <div class="message-container">
+        ${fullMessage}
+        ${resultMessage}
+      </div>
+    `;
+
+    // 更新顯示內容
+    resultScope.innerHTML = fullMessage;
+
+    // 創建並添加按鈕
+    const resetButton = document.createElement('button');
+    resetButton.textContent = '重新開始';
+    resetButton.className = 'reset-button';
+    resetButton.addEventListener('click', resetGame);
+
+    // 創建按鈕容器
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'button-container';
+    buttonContainer.appendChild(resetButton);
+
+    // 將按鈕容器加入到結果區域
+    resultScope.appendChild(buttonContainer);
+  } else {
+    // 如果遊戲沒結束，使用容器包裝戰鬥訊息
+    fullMessage = `
+      <div class="message-container">
+        ${fullMessage}
+      </div>
+    `;
+    resultScope.innerHTML = fullMessage;
+  }
+
+  // 更新 UI
+  renderUI();
 }
 
 const executeBossAttack = () => {
-  // 如果遊戲已經結束，不執行攻擊
-  if (isGameOver) {
-    return;
-  }
-
   const boss = gameMobs[0];
   const skill = boss.skill[0];
-  const resultScope = document.getElementById('result');
 
   gamePlayer.forEach(player => {
     if (player.hp > 0) {
@@ -308,6 +373,7 @@ const executeBossAttack = () => {
     }
   });
 
-  resultScope.innerHTML += `<br>${boss.name} 反擊！使出 ${skill.name} 對我方全體造成 ${skill.damage} 傷害！`;
+  // 返回反擊訊息而不是直接顯示，同樣將傷害數字用 span 包裝
+  return `<br>${boss.name} 發動反擊！使出 ${skill.name} 對我方全體造成 <span class="damage-number">${skill.damage}</span> 傷害！`;
 }
 // -------------->
