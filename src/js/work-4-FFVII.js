@@ -83,8 +83,6 @@ const creatMobs = () => {
 
 const createPlayers = () => {
   let html = ''
-  let btnHTML = ''
-  let buttonName = []
   let skills = []
   for (let i in gamePlayer) {
     skills.push(gamePlayer[i].skill.map(item => {
@@ -99,7 +97,8 @@ const createPlayers = () => {
         return item.name
       })
       for (let j in result) {
-        html += `<button onClick="attackMethods(${i}, ${j})">${result[j]}</button>`
+        // 移除 onClick 屬性，改為添加 data 屬性來存儲索引
+        html += `<button data-player="${i}" data-skill="${j}">${result[j]}</button>`
       }
       return html
     }
@@ -132,6 +131,16 @@ const createPlayers = () => {
   }
   const scope = document.getElementById('players')
   scope.innerHTML = html
+
+  // 添加事件監聽器
+  const buttons = scope.querySelectorAll('button')
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const playerIndex = parseInt(button.getAttribute('data-player'))
+      const skillIndex = parseInt(button.getAttribute('data-skill'))
+      attackMethods(playerIndex, skillIndex)
+    })
+  })
 }
 
 
@@ -239,7 +248,7 @@ const resetGame = () => {
 }
 
 // Fix: Define attackMethods as as property of the window object. Originally attackMethods is defined in a local scope, which makes it inaccessible to the inline onclick handlers.
-window.attackMethods = (playerIndex, playerSkill) => {
+const attackMethods = (playerIndex, playerSkill) => {
   // 如果遊戲已經結束，直接返回
   if (isGameOver) {
     return;
