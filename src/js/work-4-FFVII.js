@@ -233,10 +233,10 @@ const resetGame = () => {
   // 重新渲染 UI
   createPlayers();
   creatMobs();
-}
 
-// 為了確保 resetGame 可以從 HTML 中調用
-// window.resetGame = resetGame;
+  // 重置累積傷害（因為這是新遊戲）
+  accumulatedDamage = 0;
+}
 
 // Fix: Define attackMethods as as property of the window object. Originally attackMethods is defined in a local scope, which makes it inaccessible to the inline onclick handlers.
 window.attackMethods = (playerIndex, playerSkill) => {
@@ -281,25 +281,26 @@ const handleHealing = (player, skill) => {
   displayBattleAndResult(healMessage);
 }
 
+// 添加累積傷害追蹤
+let accumulatedDamage = 0;
+
 const handleAttack = (player, skill) => {
   const boss = gameMobs[0];
-
-  // 記錄攻擊前的 HP 區間
-  const previousSection = Math.ceil(boss.hp / 2000);
 
   // 造成傷害
   boss.hp -= skill.damage;
 
-  // 計算攻擊後的 HP 區間
-  const currentSection = Math.ceil(boss.hp / 2000);
+  // 累積這次的傷害
+  accumulatedDamage += skill.damage;
 
   // 顯示攻擊訊息，將傷害數字用 span 包裝
   let battleMessage = `${player.name} 對 ${boss.name} 使出 ${skill.name} 造成了 <span class="damage-number">${skill.damage}</span> 傷害！`;
 
-  // 檢查是否會觸發 BOSS 反擊（檢查是否跨越 2000 點 HP 的區間）
-  // 如果觸發 BOSS 反擊，添加反擊訊息
-  if (boss.hp > 0 && currentSection < previousSection) {
+  // 檢查是否會觸發 BOSS 反擊（累積傷害超過 2000）
+  if (boss.hp > 0 && accumulatedDamage >= 2000) {
     battleMessage += executeBossAttack();
+    // 反擊後，累積傷害歸零重新計數
+    accumulatedDamage = 0;
   }
 
   // 更新遊戲狀態
