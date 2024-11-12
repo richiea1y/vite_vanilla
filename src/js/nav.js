@@ -10,6 +10,7 @@ const pageTitleStrategy = {
   'js-day-3-dijikstra-v2.html': () => 'Javascript Day-3: Dijkstra\'s algorithm V.2 (Class-Version)',
   'js-day-4.html': () => 'Javascript Day-4: 陣列(二)、閉包、遞迴',
   'js-day-4-FFVII.html': () => 'Javascript Day-4: 仿製一個FFVII的戰鬥系統',
+  'js-day-5.html': () => 'Javascript Day-5: 原型鍊與類別(class)',
   'default': () => 'Welcome to Our Website',  // 預設標題
 };
 
@@ -73,6 +74,9 @@ appContent.insertAdjacentHTML('afterbegin', `
       </li>
       <li>
         <a href="js-day-4-FFVII.html">Day-4: 仿製一個FFVII的戰鬥系統</a>
+      </li>
+      <li>
+        <a href="js-day-5.html">Day-5: 原型鍊與類別(class)</a>
       </li>
     </ul>
   </div>
