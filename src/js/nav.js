@@ -12,6 +12,8 @@ const pageTitleStrategy = {
   'js-day-4-FFVII.html': () => 'Javascript Day-4: 仿製一個FFVII的戰鬥系統',
   'js-day-5.html': () => 'Javascript Day-5: 原型鍊與類別(class)',
   'js-day-6.html': () => 'Javascript Day-6: 異步處理 & 正則表示法',
+  'js-day-6_extra-1.html': () => 'Javascript Day-6 Extra-1: 網址驗證',
+  'js-day-6_extra-2.html': () => 'Javascript Day-6 Extra-2: 異步處理：Axios',
   'default': () => 'Welcome to Our Website',  // 預設標題
 };
 
@@ -81,6 +83,12 @@ appContent.insertAdjacentHTML('afterbegin', `
       </li>
       <li>
         <a href="js-day-6.html">Day-6: 異步處理 & 正則表示法</a>
+      </li>
+      <li>
+        <a href="js-day-6_extra-1.html">Day-6 Extra-1: 網址驗證</a>
+      </li>
+      <li>
+        <a href="js-day-6_extra-2.html">Day-6 Extra-2: 異步處理：Axios</a>
       </li>
     </ul>
   </div>

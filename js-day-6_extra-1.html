@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />Í
+  <title>JS-DAY-6 Extra-1: 網址驗證</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1 style="color: black;font-size: 2rem;">正則表達式：網址驗證</h1>
+    <p style="color: black;font-size: 1.2rem;">使用作答區的按鈕執行驗證，取出INPUT網址中的Domain Name印出</p>
+    <p style="color: black;font-size: 1.2rem;">需使用String.replace(reg, url)的形式處理網址</p>
+    <br>
+    <!--作答區-->
+    <h2 style="color: black;font-size: 1.5rem;">作答區</h2>
+    <div class="row horizontal v_center">
+      <input id="url_1" placeholder="URL 1">
+      <button onClick="printAnswer()"
+        style="background-color: gray; color: white;padding:4px;margin-left: 4px;border-radius: 5px">Action</button>
+    </div>
+    <br>
+    <div id="result"></div>
+
+    <div class="domain_sample">
+      <p style="font-size: 1.3rem; ">Test Sample:</p>
+      <ul>
+        <li>https://www.facebook.com</li>
+        <li>https://domain.name.with.many.dots.co.uk</li>
+        <li>https://weird.domain-name-with-dash.com</li>
+        <li>http://domain.with.many.sub.levels.com</li>
+        <li>https://www.twitter.com</li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+<script type="module" src="/main.js"></script>
+<script type="test/javascript" src="src/js/work-6-regex.js"></script>
+
+</html>
