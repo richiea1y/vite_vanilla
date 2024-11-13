@@ -90,10 +90,10 @@ function calculateCost(spots, from, to, costWeight, ratingWeight) {
   );
 }
 
-// TODO: 實現 findBestTravelRoute 函數
+// 實現 findBestTravelRoute 函數
 // spots 是 tourismSpots
 function findBestTravelRoute(spots, start, end, costWeight = 0.7, ratingWeight = 0.3) {
-  // TODO: 實現迪傑斯特拉演算法
+  // 實現迪傑斯特拉演算法
   // 存儲從起點到每個節點的最短距離，初始化為空對象是為了動態添加節點。
   const distances = {};
   // 記錄到達每個節點的最短路徑中的前一個節點，初始化為空對象，同樣是為了動態添加節點。

@@ -10,3 +10,5 @@ const printAnswer = () => {
   const resultScope = document.getElementById("result")
   resultScope.innerHTML = getUrlDomain(url)
 }
+
+// TODO connect with Action Button
