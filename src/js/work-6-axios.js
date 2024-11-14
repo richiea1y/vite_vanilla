@@ -1,14 +1,31 @@
-const getUrlDomain = (url) => {
-  // 請在以下區塊作答 --->
+let response = []
+const callApi = () => {
+  const keywords = document.getElementById("queryStr").value
+  const apiPath = `https://restcountries.com/v2/name/${keywords}?fullText=false`
+  // 請在以下作答，程式碼內容自行改寫 --->
 
+  // 使用 axios 呼叫 API
+  axios.get(apiPath)
+    .then(res => {
+      response = res.data
+      printAnswer('Value')
+    })
+    .catch(error => {
+      response = []
+      printAnswer('Value')
+      console.error('Error:', error)
+    })
   // --->
-  return url
 }
 
-const printAnswer = () => {
-  const url = document.getElementById("url_1").value
+const printAnswer = (val) => {
+  // 請在以下作答，程式碼內容自行改寫 --->
   const resultScope = document.getElementById("result")
-  resultScope.innerHTML = getUrlDomain(url)
+  const countries = response.map(country => country.name)
+  resultScope.innerHTML = `${val} 共有 ${response.length} 筆資料 <br>
+  搜尋結果：${countries.join(', ')}`
+  // --->
 }
 
-// TODO connect with Action Button
+const actionButton = document.getElementById("action");
+actionButton.addEventListener("click", callApi);

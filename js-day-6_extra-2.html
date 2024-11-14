@@ -11,24 +11,26 @@
 
 <body>
 
-  <h1>異步處理：Axios</h1>
-  <p>使用 Axios Library 串接API印出指定格式</p>
-  <p>input中的值輸入關鍵字需可找到相應的國家結果，格式如下：</p>
-  <ul>
+  <h1 style="color: black;font-size: 2rem; margin-bottom:1rem;">異步處理：Axios</h1>
+  <p style="color: black;font-size: 1.2rem;">使用 Axios Library 串接API印出指定格式</p>
+  <p style="color: black;font-size: 1.2rem;">input中的值輸入關鍵字需可找到相應的國家結果，格式如下：</p>
+  <ul style="color: black;font-size: 1rem;margin:1.3rem 0;">
     <li>Value 共有 N 筆資料</li>
     <li>搜尋結果：國家名稱1, 國家名稱2...etc</li>
   </ul>
 
   <!--作答區-->
-  <h2>作答區</h2>
+  <h2 style="margin: 10px 0; font-size: 1.3rem">作答區</h2>
   <div class="row horizontal v_center">
     <input id="queryStr" placeholder="Keywords">
-    <button onClick="callApi()">Search</button>
+    <button id="action" style="background-color: gray; color: white;padding:4px;margin-left: 4px;border-radius: 5px"
+      onClick="callApi()">Search</button>
   </div>
   <br>
   <div id="result"></div>
+  <script type="module" src="/main.js"></script>
+  <script type="module" src="src/js/work-6-axios.js"></script>
 </body>
-<script type="module" src="/main.js"></script>
-<script type="module" src="src/js/work-6-axios.js"></script>
+
 
 </html>
