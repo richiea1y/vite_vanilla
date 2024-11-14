@@ -22,8 +22,21 @@ const printAnswer = (val) => {
   // 請在以下作答，程式碼內容自行改寫 --->
   const resultScope = document.getElementById("result")
   const countries = response.map(country => country.name)
+
+  // 建立國家清單 HTML
+  /*
   resultScope.innerHTML = `${val} 共有 ${response.length} 筆資料 <br>
   搜尋結果：${countries.join(', ')}`
+  */
+  const countriesList = countries.map(country => `<li>${country}</li>`).join('')
+
+  resultScope.innerHTML = `
+    <p>${val} 共有 ${response.length} 筆資料</p>
+    <p>搜尋結果：</p>
+    <ul>
+      ${countriesList}
+    </ul>
+  `
   // --->
 }
 
