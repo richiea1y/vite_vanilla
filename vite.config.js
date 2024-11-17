@@ -37,6 +37,7 @@ export default defineConfig({
         jsDay6: resolve(__dirname, "js-day-6.html"),
         jsDay_Extra1: resolve(__dirname, "js-day-6_extra-1.html"),
         jsDay_Extra2: resolve(__dirname, "js-day-6_extra-2.html"),
+        jsDay7: resolve(__dirname, "js-day-7.html"),
       },
       output: {
         /* 

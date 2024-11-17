@@ -14,6 +14,7 @@ const pageTitleStrategy = {
   'js-day-6.html': () => 'Javascript Day-6: 異步處理 & 正則表示法',
   'js-day-6_extra-1.html': () => 'Javascript Day-6 Extra-1: 網址驗證',
   'js-day-6_extra-2.html': () => 'Javascript Day-6 Extra-2: 異步處理：Axios',
+  'js-day-7.html': () => 'Javascript Day-7: 瀏覽器儲存 (Cookies & LocalStorage)',
   'default': () => 'Welcome to Our Website',  // 預設標題
 };
 
@@ -89,6 +90,9 @@ appContent.insertAdjacentHTML('afterbegin', `
       </li>
       <li>
         <a href="js-day-6_extra-2.html">Day-6 Extra-2: 異步處理：Axios</a>
+      </li>
+      <li>
+        <a href="js-day-7.html">Day-7: 瀏覽器儲存 (Cookies & LocalStorage)</a>
       </li>
     </ul>
   </div>
